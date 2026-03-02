@@ -10,4 +10,6 @@ public class FatecadsApplication {
 		SpringApplication.run(FatecadsApplication.class, args);
 	}
 
+	
+
 }
