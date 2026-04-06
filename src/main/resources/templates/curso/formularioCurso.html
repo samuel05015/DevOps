@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Curso</title>
+    <link rel="stylesheet" th:href="@{/css/bat-theme.css}" href="/css/bat-theme.css">
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero">
+            <span class="eyebrow">Cadastro de Cursos</span>
+            <h1>Registrar ou Atualizar Curso</h1>
+            <p>
+                Organize a grade academica com o mesmo fluxo de cadastro dos alunos, agora aplicado aos cursos.
+            </p>
+            <div class="hero-actions">
+                <a class="btn btn-secondary" th:href="@{/cursos/listar}" href="/cursos/listar">Voltar para Listagem</a>
+            </div>
+        </section>
+
+        <section class="content-grid">
+            <article class="form-card span-7">
+                <div class="section-header">
+                    <div>
+                        <p class="panel-caption">Formulario</p>
+                        <h2 class="section-title">Dados do Curso</h2>
+                    </div>
+                    <span class="badge" th:text="${curso.idCurso != null ? 'Modo Edicao' : 'Novo Cadastro'}">Novo Cadastro</span>
+                </div>
+
+                <form th:action="@{/cursos/salvar}" method="post" th:object="${curso}">
+                    <input type="hidden" th:field="*{idCurso}">
+
+                    <div class="form-grid">
+                        <div class="field field-full">
+                            <label for="nomeCurso">Nome do Curso</label>
+                            <input id="nomeCurso" type="text" th:field="*{nomeCurso}" placeholder="Analise e Desenvolvimento de Sistemas" required>
+                        </div>
+
+                        <div class="field">
+                            <label for="periodoCurso">Periodo</label>
+                            <input id="periodoCurso" type="text" th:field="*{periodoCurso}" placeholder="Noturno, Matutino ou Integral" required>
+                        </div>
+
+                        <div class="field">
+                            <label for="cargaHorariaCurso">Carga Horaria</label>
+                            <input id="cargaHorariaCurso" type="number" th:field="*{cargaHorariaCurso}" placeholder="Ex: 2800" min="1" required>
+                        </div>
+                    </div>
+
+                    <div class="form-actions" style="margin-top: 24px;">
+                        <input type="submit" value="Salvar Curso">
+                        <a class="btn btn-secondary" th:href="@{/fatecads}" href="/fatecads">Tela Inicial</a>
+                    </div>
+                </form>
+            </article>
+
+            <aside class="card span-5">
+                <p class="panel-caption">Diretrizes</p>
+                <h2 class="section-title">Checklist Rapido</h2>
+                <ul class="feature-list">
+                    <li>Nome, periodo e carga horaria sao obrigatorios</li>
+                    <li>A mesma tela atende criacao e edicao</li>
+                    <li>Ao salvar, o fluxo volta para a listagem de cursos</li>
+                </ul>
+            </aside>
+        </section>
+    </main>
+</body>
+</html>

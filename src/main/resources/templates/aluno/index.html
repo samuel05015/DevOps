@@ -15,11 +15,11 @@
                     <h1>Painel Tatico de Gestao Academica</h1>
                     <p>
                         Uma interface com clima urbano noturno para acompanhar cadastros, manter a base organizada
-                        e entrar rapido no modulo de alunos.
+                        e entrar rapido nos modulos de alunos e cursos.
                     </p>
                     <div class="hero-actions">
                         <a class="btn btn-primary" th:href="@{/alunos/listar}" href="/alunos/listar">Abrir Modulo de Alunos</a>
-                        <a class="btn btn-secondary" th:href="@{/alunos/criar}" href="/alunos/criar">Novo Cadastro</a>
+                        <a class="btn btn-secondary" th:href="@{/cursos/listar}" href="/cursos/listar">Abrir Modulo de Cursos</a>
                     </div>
                 </div>
                 <aside class="stat-card">
@@ -29,7 +29,7 @@
                         Visual em alto contraste para destacar acoes importantes, listagens e formularios.
                     </p>
                     <ul class="feature-list">
-                        <li>Navegacao direta para listagem e cadastro</li>
+                        <li>Navegacao direta para alunos e cursos</li>
                         <li>Paleta preto, branco, cinza e amarelo</li>
                         <li>Layout responsivo para desktop e celular</li>
                     </ul>
@@ -57,8 +57,21 @@
                     <a th:href="@{/fatecads}" href="/fatecads">Tela inicial <span>/fatecads</span></a>
                     <a th:href="@{/alunos/listar}" href="/alunos/listar">Listagem <span>/alunos/listar</span></a>
                     <a th:href="@{/alunos/criar}" href="/alunos/criar">Formulario <span>/alunos/criar</span></a>
+                    <a th:href="@{/cursos/listar}" href="/cursos/listar">Cursos <span>/cursos/listar</span></a>
                 </div>
             </aside>
+
+            <article class="card span-12">
+                <p class="panel-caption">Expansao</p>
+                <h2 class="section-title">Modulo de Cursos</h2>
+                <p class="section-subtitle">
+                    A mesma experiencia de CRUD agora esta disponivel para cursos, com listagem, cadastro, edicao e exclusao.
+                </p>
+                <div class="toolbar">
+                    <a class="btn btn-primary" th:href="@{/cursos/listar}" href="/cursos/listar">Ver Cursos</a>
+                    <a class="btn btn-secondary" th:href="@{/cursos/criar}" href="/cursos/criar">Cadastrar Curso</a>
+                </div>
+            </article>
         </section>
     </main>
 </body>

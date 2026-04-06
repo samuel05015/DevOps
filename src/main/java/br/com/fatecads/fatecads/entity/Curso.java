@@ -27,7 +27,7 @@ public class Curso {
     private String periodoCurso;
 
     @Column(nullable = false)
-    private Integer CargaHorariaCurso;
+    private Integer cargaHorariaCurso;
     
 
 }

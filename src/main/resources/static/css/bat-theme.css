@@ -281,7 +281,8 @@ label {
 }
 
 input[type="text"],
-input[type="email"] {
+input[type="email"],
+input[type="number"] {
     width: 100%;
     min-height: 52px;
     padding: 14px 16px;
@@ -293,7 +294,8 @@ input[type="email"] {
 }
 
 input[type="text"]:focus,
-input[type="email"]:focus {
+input[type="email"]:focus,
+input[type="number"]:focus {
     border-color: var(--line-strong);
     box-shadow: 0 0 0 4px rgba(255, 208, 0, 0.08);
 }
