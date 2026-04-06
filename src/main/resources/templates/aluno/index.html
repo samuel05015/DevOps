@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistemas FatecADS</title>
+    <link rel="stylesheet" th:href="@{/css/bat-theme.css}" href="/css/bat-theme.css">
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero">
+            <div class="hero-grid">
+                <div>
+                    <span class="eyebrow">FatecADS Control</span>
+                    <h1>Painel Tatico de Gestao Academica</h1>
+                    <p>
+                        Uma interface com clima urbano noturno para acompanhar cadastros, manter a base organizada
+                        e entrar rapido no modulo de alunos.
+                    </p>
+                    <div class="hero-actions">
+                        <a class="btn btn-primary" th:href="@{/alunos/listar}" href="/alunos/listar">Abrir Modulo de Alunos</a>
+                        <a class="btn btn-secondary" th:href="@{/alunos/criar}" href="/alunos/criar">Novo Cadastro</a>
+                    </div>
+                </div>
+                <aside class="stat-card">
+                    <span class="panel-caption">Status do Sistema</span>
+                    <strong>Online</strong>
+                    <p class="helper-text">
+                        Visual em alto contraste para destacar acoes importantes, listagens e formularios.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Navegacao direta para listagem e cadastro</li>
+                        <li>Paleta preto, branco, cinza e amarelo</li>
+                        <li>Layout responsivo para desktop e celular</li>
+                    </ul>
+                </aside>
+            </div>
+        </section>
+
+        <section class="content-grid">
+            <article class="card span-7">
+                <p class="panel-caption">Central</p>
+                <h2 class="section-title">Acesso Rapido</h2>
+                <p class="section-subtitle">
+                    Entre no gerenciamento de alunos para cadastrar, editar, excluir e revisar os dados da turma.
+                </p>
+                <div class="toolbar">
+                    <a class="btn btn-primary" th:href="@{/alunos/listar}" href="/alunos/listar">Ver Alunos</a>
+                    <a class="btn btn-secondary" th:href="@{/alunos/criar}" href="/alunos/criar">Cadastrar Aluno</a>
+                </div>
+            </article>
+
+            <aside class="card span-5">
+                <p class="panel-caption">Atalhos</p>
+                <h2 class="section-title">Rotas Principais</h2>
+                <div class="quick-links">
+                    <a th:href="@{/fatecads}" href="/fatecads">Tela inicial <span>/fatecads</span></a>
+                    <a th:href="@{/alunos/listar}" href="/alunos/listar">Listagem <span>/alunos/listar</span></a>
+                    <a th:href="@{/alunos/criar}" href="/alunos/criar">Formulario <span>/alunos/criar</span></a>
+                </div>
+            </aside>
+        </section>
+    </main>
+</body>
+</html>

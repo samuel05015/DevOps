@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listagem de Alunos</title>
+    <link rel="stylesheet" th:href="@{/css/bat-theme.css}" href="/css/bat-theme.css">
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero">
+            <div class="hero-grid">
+                <div>
+                    <span class="eyebrow">Monitoramento</span>
+                    <h1>Base de Alunos</h1>
+                    <p>
+                        Consulte os registros, entre em modo de edicao rapidamente e mantenha a operacao organizada
+                        com uma tabela de alto contraste.
+                    </p>
+                </div>
+                <aside class="stat-card">
+                    <span class="panel-caption">Operacoes</span>
+                    <strong th:text="${#lists.size(alunos)}">0</strong>
+                    <p class="helper-text">Quantidade de alunos atualmente carregada na listagem.</p>
+                    <div class="hero-actions">
+                        <a class="btn btn-primary" th:href="@{/alunos/criar}" href="/alunos/criar">Novo Aluno</a>
+                        <a class="btn btn-secondary" th:href="@{/fatecads}" href="/fatecads">Painel Inicial</a>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <section class="content-grid">
+            <article class="table-card span-12">
+                <div class="section-header">
+                    <div>
+                        <p class="panel-caption">Listagem</p>
+                        <h2 class="section-title">Alunos Cadastrados</h2>
+                    </div>
+                    <div class="toolbar">
+                        <a class="btn btn-primary" th:href="@{/alunos/criar}" href="/alunos/criar">Criar Novo Aluno</a>
+                    </div>
+                </div>
+
+                <div class="empty-state" th:if="${#lists.isEmpty(alunos)}">
+                    Nenhum aluno cadastrado ainda. Use o botao acima para iniciar o primeiro registro.
+                </div>
+
+                <table th:if="${not #lists.isEmpty(alunos)}">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Telefone</th>
+                            <th>CPF</th>
+                            <th>Endereco</th>
+                            <th>RA</th>
+                            <th>Acoes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="aluno : ${alunos}">
+                            <td th:text="${aluno.nomeAluno}"></td>
+                            <td th:text="${aluno.emailAluno}"></td>
+                            <td th:text="${aluno.telefoneAluno}"></td>
+                            <td th:text="${aluno.cpfAluno}"></td>
+                            <td th:text="${aluno.enderecoAluno}"></td>
+                            <td th:text="${aluno.raAluno}"></td>
+                            <td>
+                                <div class="inline-actions">
+                                    <a class="btn btn-secondary" th:href="@{/alunos/editar/{id}(id=${aluno.idAluno})}">Editar</a>
+                                    <a class="btn btn-danger" th:href="@{/alunos/excluir/{id}(id=${aluno.idAluno})}">Excluir</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </article>
+        </section>
+    </main>
+</body>
+</html>

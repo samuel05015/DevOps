@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Aluno</title>
+    <link rel="stylesheet" th:href="@{/css/bat-theme.css}" href="/css/bat-theme.css">
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero">
+            <span class="eyebrow">Cadastro de Alunos</span>
+            <h1>Registrar ou Atualizar Aluno</h1>
+            <p>
+                Preencha os dados abaixo para manter a base academica em ordem. O visual destaca os campos essenciais
+                e deixa a navegacao mais clara.
+            </p>
+            <div class="hero-actions">
+                <a class="btn btn-secondary" th:href="@{/alunos/listar}" href="/alunos/listar">Voltar para Listagem</a>
+            </div>
+        </section>
+
+        <section class="content-grid">
+            <article class="form-card span-7">
+                <div class="section-header">
+                    <div>
+                        <p class="panel-caption">Formulario</p>
+                        <h2 class="section-title">Dados do Aluno</h2>
+                    </div>
+                    <span class="badge" th:text="${aluno.idAluno != null ? 'Modo Edicao' : 'Novo Cadastro'}">Novo Cadastro</span>
+                </div>
+
+                <form th:action="@{/alunos/salvar}" method="post" th:object="${aluno}">
+                    <input type="hidden" th:field="*{idAluno}">
+
+                    <div class="form-grid">
+                        <div class="field field-full">
+                            <label for="nomeAluno">Nome</label>
+                            <input id="nomeAluno" type="text" th:field="*{nomeAluno}" placeholder="Nome completo do aluno" required>
+                        </div>
+
+                        <div class="field">
+                            <label for="emailAluno">Email</label>
+                            <input id="emailAluno" type="email" th:field="*{emailAluno}" placeholder="aluno@email.com">
+                        </div>
+
+                        <div class="field">
+                            <label for="telefoneAluno">Telefone</label>
+                            <input id="telefoneAluno" type="text" th:field="*{telefoneAluno}" placeholder="11999999999" required>
+                        </div>
+
+                        <div class="field">
+                            <label for="cpfAluno">CPF</label>
+                            <input id="cpfAluno" type="text" th:field="*{cpfAluno}" placeholder="00000000000" required>
+                        </div>
+
+                        <div class="field">
+                            <label for="raAluno">RA</label>
+                            <input id="raAluno" type="text" th:field="*{raAluno}" placeholder="Numero do registro academico" required>
+                        </div>
+
+                        <div class="field field-full">
+                            <label for="enderecoAluno">Endereco</label>
+                            <input id="enderecoAluno" type="text" th:field="*{enderecoAluno}" placeholder="Rua, numero, bairro e cidade" required>
+                        </div>
+                    </div>
+
+                    <div class="form-actions" style="margin-top: 24px;">
+                        <input type="submit" value="Salvar Aluno">
+                        <a class="btn btn-secondary" th:href="@{/fatecads}" href="/fatecads">Tela Inicial</a>
+                    </div>
+                </form>
+            </article>
+
+            <aside class="card span-5">
+                <p class="panel-caption">Diretrizes</p>
+                <h2 class="section-title">Checklist Rapido</h2>
+                <ul class="feature-list">
+                    <li>Nome, telefone, endereco, CPF e RA sao obrigatorios</li>
+                    <li>Use a mesma tela para novo cadastro e edicao</li>
+                    <li>Depois de salvar, o fluxo retorna para a listagem</li>
+                </ul>
+            </aside>
+        </section>
+    </main>
+</body>
+</html>
