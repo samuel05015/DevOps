@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listagem de Professores</title>
+    <link rel="stylesheet" th:href="@{/css/bat-theme.css}" href="/css/bat-theme.css">
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero">
+            <div class="hero-grid">
+                <div>
+                    <span class="eyebrow">Corpo Docente</span>
+                    <h1>Base de Professores</h1>
+                    <p>
+                        Consulte o quadro docente, atualize registros rapidamente e mantenha o cadastro alinhado.
+                    </p>
+                </div>
+                <aside class="stat-card">
+                    <span class="panel-caption">Operacoes</span>
+                    <strong th:text="${#lists.size(professores)}">0</strong>
+                    <p class="helper-text">Quantidade de professores atualmente carregada na listagem.</p>
+                    <div class="hero-actions">
+                        <a class="btn btn-primary" th:href="@{/professores/criar}" href="/professores/criar">Novo Professor</a>
+                        <a class="btn btn-secondary" th:href="@{/fatecads}" href="/fatecads">Painel Inicial</a>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <section class="content-grid">
+            <article class="table-card span-12">
+                <div class="section-header">
+                    <div>
+                        <p class="panel-caption">Listagem</p>
+                        <h2 class="section-title">Professores Cadastrados</h2>
+                    </div>
+                    <div class="toolbar">
+                        <a class="btn btn-primary" th:href="@{/professores/criar}" href="/professores/criar">Criar Novo Professor</a>
+                    </div>
+                </div>
+
+                <div class="empty-state" th:if="${#lists.isEmpty(professores)}">
+                    Nenhum professor cadastrado ainda. Use o botao acima para iniciar o primeiro registro.
+                </div>
+
+                <table th:if="${not #lists.isEmpty(professores)}">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Telefone</th>
+                            <th>Graduacao</th>
+                            <th>RM</th>
+                            <th>Acoes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="professor : ${professores}">
+                            <td th:text="${professor.nomeProfessor}"></td>
+                            <td th:text="${professor.telefoneProfessor}"></td>
+                            <td th:text="${professor.graduacaoProfessor}"></td>
+                            <td th:text="${professor.rmProfessor}"></td>
+                            <td>
+                                <div class="inline-actions">
+                                    <a class="btn btn-secondary" th:href="@{/professores/editar/{id}(id=${professor.idProfessor})}">Editar</a>
+                                    <a class="btn btn-danger" th:href="@{/professores/excluir/{id}(id=${professor.idProfessor})}">Excluir</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </article>
+        </section>
+    </main>
+</body>
+</html>

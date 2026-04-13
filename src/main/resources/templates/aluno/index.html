@@ -20,6 +20,7 @@
                     <div class="hero-actions">
                         <a class="btn btn-primary" th:href="@{/alunos/listar}" href="/alunos/listar">Abrir Modulo de Alunos</a>
                         <a class="btn btn-secondary" th:href="@{/cursos/listar}" href="/cursos/listar">Abrir Modulo de Cursos</a>
+                        <a class="btn btn-secondary" th:href="@{/professores/listar}" href="/professores/listar">Abrir Modulo de Professores</a>
                     </div>
                 </div>
                 <aside class="stat-card">
@@ -30,6 +31,7 @@
                     </p>
                     <ul class="feature-list">
                         <li>Navegacao direta para alunos e cursos</li>
+                        <li>Cadastro dedicado para professores</li>
                         <li>Paleta preto, branco, cinza e amarelo</li>
                         <li>Layout responsivo para desktop e celular</li>
                     </ul>
@@ -58,6 +60,7 @@
                     <a th:href="@{/alunos/listar}" href="/alunos/listar">Listagem <span>/alunos/listar</span></a>
                     <a th:href="@{/alunos/criar}" href="/alunos/criar">Formulario <span>/alunos/criar</span></a>
                     <a th:href="@{/cursos/listar}" href="/cursos/listar">Cursos <span>/cursos/listar</span></a>
+                    <a th:href="@{/professores/listar}" href="/professores/listar">Professores <span>/professores/listar</span></a>
                 </div>
             </aside>
 
@@ -70,6 +73,18 @@
                 <div class="toolbar">
                     <a class="btn btn-primary" th:href="@{/cursos/listar}" href="/cursos/listar">Ver Cursos</a>
                     <a class="btn btn-secondary" th:href="@{/cursos/criar}" href="/cursos/criar">Cadastrar Curso</a>
+                </div>
+            </article>
+
+            <article class="card span-12">
+                <p class="panel-caption">Equipe</p>
+                <h2 class="section-title">Modulo de Professores</h2>
+                <p class="section-subtitle">
+                    Cadastre professores com nome, telefone, graduacao e RM usando a mesma experiencia de CRUD do restante do sistema.
+                </p>
+                <div class="toolbar">
+                    <a class="btn btn-primary" th:href="@{/professores/listar}" href="/professores/listar">Ver Professores</a>
+                    <a class="btn btn-secondary" th:href="@{/professores/criar}" href="/professores/criar">Cadastrar Professor</a>
                 </div>
             </article>
         </section>

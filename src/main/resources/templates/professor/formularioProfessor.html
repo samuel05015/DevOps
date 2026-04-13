@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Professor</title>
+    <link rel="stylesheet" th:href="@{/css/bat-theme.css}" href="/css/bat-theme.css">
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero">
+            <span class="eyebrow">Cadastro de Professores</span>
+            <h1>Registrar ou Atualizar Professor</h1>
+            <p>
+                Mantenha o quadro docente organizado com um formulario direto para cadastro e atualizacao dos dados.
+            </p>
+            <div class="hero-actions">
+                <a class="btn btn-secondary" th:href="@{/professores/listar}" href="/professores/listar">Voltar para Listagem</a>
+            </div>
+        </section>
+
+        <section class="content-grid">
+            <article class="form-card span-7">
+                <div class="section-header">
+                    <div>
+                        <p class="panel-caption">Formulario</p>
+                        <h2 class="section-title">Dados do Professor</h2>
+                    </div>
+                    <span class="badge" th:text="${professor.idProfessor != null ? 'Modo Edicao' : 'Novo Cadastro'}">Novo Cadastro</span>
+                </div>
+
+                <form th:action="@{/professores/salvar}" method="post" th:object="${professor}">
+                    <input type="hidden" th:field="*{idProfessor}">
+
+                    <div class="form-grid">
+                        <div class="field field-full">
+                            <label for="nomeProfessor">Nome</label>
+                            <input id="nomeProfessor" type="text" th:field="*{nomeProfessor}" placeholder="Nome completo do professor" required>
+                        </div>
+
+                        <div class="field">
+                            <label for="telefoneProfessor">Telefone</label>
+                            <input id="telefoneProfessor" type="text" th:field="*{telefoneProfessor}" placeholder="11999999999" required>
+                        </div>
+
+                        <div class="field">
+                            <label for="rmProfessor">RM</label>
+                            <input id="rmProfessor" type="text" th:field="*{rmProfessor}" placeholder="Registro do professor" required>
+                        </div>
+
+                        <div class="field field-full">
+                            <label for="graduacaoProfessor">Graduacao</label>
+                            <input id="graduacaoProfessor" type="text" th:field="*{graduacaoProfessor}" placeholder="Ex: Mestre em Engenharia de Software" required>
+                        </div>
+                    </div>
+
+                    <div class="form-actions" style="margin-top: 24px;">
+                        <input type="submit" value="Salvar Professor">
+                        <a class="btn btn-secondary" th:href="@{/fatecads}" href="/fatecads">Tela Inicial</a>
+                    </div>
+                </form>
+            </article>
+
+            <aside class="card span-5">
+                <p class="panel-caption">Diretrizes</p>
+                <h2 class="section-title">Checklist Rapido</h2>
+                <ul class="feature-list">
+                    <li>Nome, telefone, graduacao e RM sao obrigatorios</li>
+                    <li>A mesma tela atende criacao e edicao</li>
+                    <li>Ao salvar, o fluxo retorna para a listagem de professores</li>
+                </ul>
+            </aside>
+        </section>
+    </main>
+</body>
+</html>
