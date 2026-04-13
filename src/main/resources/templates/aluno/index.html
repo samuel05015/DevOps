@@ -7,10 +7,11 @@
     <link rel="stylesheet" th:href="@{/css/bat-theme.css}" href="/css/bat-theme.css">
 </head>
 <body>
-    <main class="page-shell">
+    <main class="page-shell home-shell">
+        <img class="home-left-figure" th:src="@{/img/willsmith.png}" src="/img/willsmith.png" alt="Will Smith decorativo">
         <section class="hero">
-            <div class="hero-grid">
-                <div>
+            <div class="hero-brand">
+                <div class="hero-copy">
                     <span class="eyebrow">FatecADS Control</span>
                     <h1>Painel Tatico de Gestao Academica</h1>
                     <p>
@@ -24,6 +25,10 @@
                         <a class="btn btn-secondary" th:href="@{/disciplinas/listar}" href="/disciplinas/listar">Abrir Modulo de Disciplinas</a>
                     </div>
                 </div>
+                <img class="hero-logo" th:src="@{/img/batman-logo.png}" src="/img/batman-logo.png" alt="Logo do Batman">
+            </div>
+
+            <div class="hero-grid">
                 <aside class="stat-card">
                     <span class="panel-caption">Status do Sistema</span>
                     <strong>Online</strong>
@@ -51,6 +56,13 @@
                 <div class="toolbar">
                     <a class="btn btn-primary" th:href="@{/alunos/listar}" href="/alunos/listar">Ver Alunos</a>
                     <a class="btn btn-secondary" th:href="@{/alunos/criar}" href="/alunos/criar">Cadastrar Aluno</a>
+                </div>
+                <div class="card-brand">
+                    <img th:src="@{/img/batman-logo.png}" src="/img/batman-logo.png" alt="Simbolo do Batman">
+                    <div>
+                        <span>Tema Gotham</span>
+                        <p class="helper-text">O logo reforca a identidade visual usada em todo o painel academico.</p>
+                    </div>
                 </div>
             </article>
 

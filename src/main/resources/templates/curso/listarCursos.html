@@ -9,14 +9,18 @@
 <body>
     <main class="page-shell">
         <section class="hero">
-            <div class="hero-grid">
-                <div>
+            <div class="hero-brand">
+                <div class="hero-copy">
                     <span class="eyebrow">Planejamento</span>
                     <h1>Base de Cursos</h1>
                     <p>
                         Consulte a grade cadastrada, ajuste os dados dos cursos e mantenha a oferta organizada.
                     </p>
                 </div>
+                <img class="hero-logo" th:src="@{/img/batman-logo.png}" src="/img/batman-logo.png" alt="Logo do Batman">
+            </div>
+
+            <div class="hero-grid">
                 <aside class="stat-card">
                     <span class="panel-caption">Operacoes</span>
                     <strong th:text="${#lists.size(cursos)}">0</strong>

@@ -9,14 +9,18 @@
 <body>
     <main class="page-shell">
         <section class="hero">
-            <div class="hero-grid">
-                <div>
+            <div class="hero-brand">
+                <div class="hero-copy">
                     <span class="eyebrow">Grade Curricular</span>
                     <h1>Base de Disciplinas</h1>
                     <p>
                         Consulte a grade cadastrada, ajuste as disciplinas e mantenha a estrutura curricular visivel.
                     </p>
                 </div>
+                <img class="hero-logo" th:src="@{/img/batman-logo.png}" src="/img/batman-logo.png" alt="Logo do Batman">
+            </div>
+
+            <div class="hero-grid">
                 <aside class="stat-card">
                     <span class="panel-caption">Operacoes</span>
                     <strong th:text="${#lists.size(disciplinas)}">0</strong>
