@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listagem de Disciplinas</title>
+    <link rel="stylesheet" th:href="@{/css/bat-theme.css}" href="/css/bat-theme.css">
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero">
+            <div class="hero-grid">
+                <div>
+                    <span class="eyebrow">Grade Curricular</span>
+                    <h1>Base de Disciplinas</h1>
+                    <p>
+                        Consulte a grade cadastrada, ajuste as disciplinas e mantenha a estrutura curricular visivel.
+                    </p>
+                </div>
+                <aside class="stat-card">
+                    <span class="panel-caption">Operacoes</span>
+                    <strong th:text="${#lists.size(disciplinas)}">0</strong>
+                    <p class="helper-text">Quantidade de disciplinas atualmente carregada na listagem.</p>
+                    <div class="hero-actions">
+                        <a class="btn btn-primary" th:href="@{/disciplinas/criar}" href="/disciplinas/criar">Nova Disciplina</a>
+                        <a class="btn btn-secondary" th:href="@{/fatecads}" href="/fatecads">Painel Inicial</a>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <section class="content-grid">
+            <article class="table-card span-12">
+                <div class="section-header">
+                    <div>
+                        <p class="panel-caption">Listagem</p>
+                        <h2 class="section-title">Disciplinas Cadastradas</h2>
+                    </div>
+                    <div class="toolbar">
+                        <a class="btn btn-primary" th:href="@{/disciplinas/criar}" href="/disciplinas/criar">Criar Nova Disciplina</a>
+                    </div>
+                </div>
+
+                <div class="empty-state" th:if="${#lists.isEmpty(disciplinas)}">
+                    Nenhuma disciplina cadastrada ainda. Use o botao acima para iniciar o primeiro registro.
+                </div>
+
+                <table th:if="${not #lists.isEmpty(disciplinas)}">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Sigla</th>
+                            <th>Carga Horaria</th>
+                            <th>Acoes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="disciplina : ${disciplinas}">
+                            <td th:text="${disciplina.nomeDisciplina}"></td>
+                            <td th:text="${disciplina.siglaDisciplina}"></td>
+                            <td th:text="${disciplina.cargaHorariaDisciplina}"></td>
+                            <td>
+                                <div class="inline-actions">
+                                    <a class="btn btn-secondary" th:href="@{/disciplinas/editar/{id}(id=${disciplina.idDisciplina})}">Editar</a>
+                                    <a class="btn btn-danger" th:href="@{/disciplinas/excluir/{id}(id=${disciplina.idDisciplina})}">Excluir</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </article>
+        </section>
+    </main>
+</body>
+</html>

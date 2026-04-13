@@ -21,6 +21,7 @@
                         <a class="btn btn-primary" th:href="@{/alunos/listar}" href="/alunos/listar">Abrir Modulo de Alunos</a>
                         <a class="btn btn-secondary" th:href="@{/cursos/listar}" href="/cursos/listar">Abrir Modulo de Cursos</a>
                         <a class="btn btn-secondary" th:href="@{/professores/listar}" href="/professores/listar">Abrir Modulo de Professores</a>
+                        <a class="btn btn-secondary" th:href="@{/disciplinas/listar}" href="/disciplinas/listar">Abrir Modulo de Disciplinas</a>
                     </div>
                 </div>
                 <aside class="stat-card">
@@ -30,8 +31,9 @@
                         Visual em alto contraste para destacar acoes importantes, listagens e formularios.
                     </p>
                     <ul class="feature-list">
-                        <li>Navegacao direta para alunos e cursos</li>
+                        <li>Navegacao direta para alunos, cursos, professores e disciplinas</li>
                         <li>Cadastro dedicado para professores</li>
+                        <li>Cadastro dedicado para disciplinas</li>
                         <li>Paleta preto, branco, cinza e amarelo</li>
                         <li>Layout responsivo para desktop e celular</li>
                     </ul>
@@ -61,6 +63,7 @@
                     <a th:href="@{/alunos/criar}" href="/alunos/criar">Formulario <span>/alunos/criar</span></a>
                     <a th:href="@{/cursos/listar}" href="/cursos/listar">Cursos <span>/cursos/listar</span></a>
                     <a th:href="@{/professores/listar}" href="/professores/listar">Professores <span>/professores/listar</span></a>
+                    <a th:href="@{/disciplinas/listar}" href="/disciplinas/listar">Disciplinas <span>/disciplinas/listar</span></a>
                 </div>
             </aside>
 
@@ -85,6 +88,18 @@
                 <div class="toolbar">
                     <a class="btn btn-primary" th:href="@{/professores/listar}" href="/professores/listar">Ver Professores</a>
                     <a class="btn btn-secondary" th:href="@{/professores/criar}" href="/professores/criar">Cadastrar Professor</a>
+                </div>
+            </article>
+
+            <article class="card span-12">
+                <p class="panel-caption">Curriculo</p>
+                <h2 class="section-title">Modulo de Disciplinas</h2>
+                <p class="section-subtitle">
+                    Gerencie disciplinas com nome, sigla e carga horaria em um CRUD alinhado aos outros modulos academicos.
+                </p>
+                <div class="toolbar">
+                    <a class="btn btn-primary" th:href="@{/disciplinas/listar}" href="/disciplinas/listar">Ver Disciplinas</a>
+                    <a class="btn btn-secondary" th:href="@{/disciplinas/criar}" href="/disciplinas/criar">Cadastrar Disciplina</a>
                 </div>
             </article>
         </section>
