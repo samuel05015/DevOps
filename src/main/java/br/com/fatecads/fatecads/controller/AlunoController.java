@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import br.com.fatecads.fatecads.entity.Aluno;
 import br.com.fatecads.fatecads.service.AlunoService;
-
+import br.com.fatecads.fatecads.service.CursoService;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +22,10 @@ public class AlunoController {
     //injeção de dependêencia da service de alunos
     @Autowired
     private AlunoService alunoService;
+
+    //injeção de dependêcia da service de cursos
+    @Autowired
+    private CursoService cursoService;
 
 
     @PostMapping("/salvar")
@@ -42,6 +46,7 @@ public class AlunoController {
     @GetMapping("/criar")
     public String criar(Model model) {
         model.addAttribute("aluno", new Aluno());
+        model.addAttribute("cursos", cursoService.findAll());
         return "aluno/formularioAluno";
     }
 
@@ -55,6 +60,7 @@ public class AlunoController {
     public String editar(@PathVariable Integer id, Model model) {
         Aluno aluno = alunoService.findById(id);
         model.addAttribute("aluno", aluno);
+        model.addAttribute("cursos", cursoService.findAll());
         return "aluno/formularioAluno";    
             
         

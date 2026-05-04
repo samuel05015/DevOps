@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listagem de Disciplinas</title>
-    <link rel="stylesheet" th:href="@{/css/bat-theme.css}" href="/css/bat-theme.css">
+    <link rel="stylesheet" th:href="@{/css/bat-theme.css(v=3)}" href="/css/bat-theme.css?v=3">
 </head>
 <body>
     <main class="page-shell">
@@ -17,7 +17,7 @@
                         Consulte a grade cadastrada, ajuste as disciplinas e mantenha a estrutura curricular visivel.
                     </p>
                 </div>
-                <img class="hero-logo" th:src="@{/img/batman-logo.png}" src="/img/batman-logo.png" alt="Logo do Batman">
+                <img class="hero-logo" th:src="@{/img/gatochorando.png}" src="/img/gatochorando.png" alt="Imagem decorativa de gato chorando">
             </div>
 
             <div class="hero-grid">
@@ -55,15 +55,19 @@
                             <th>Nome</th>
                             <th>Sigla</th>
                             <th>Carga Horaria</th>
+                            <th>Curso</th>
+                            <th>Professor</th>
                             <th>Acoes</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr th:each="disciplina : ${disciplinas}">
-                            <td th:text="${disciplina.nomeDisciplina}"></td>
-                            <td th:text="${disciplina.siglaDisciplina}"></td>
-                            <td th:text="${disciplina.cargaHorariaDisciplina}"></td>
-                            <td>
+                            <td data-label="Nome" th:text="${disciplina.nomeDisciplina}"></td>
+                            <td data-label="Sigla" th:text="${disciplina.siglaDisciplina}"></td>
+                            <td data-label="Carga Horaria" th:text="${disciplina.cargaHorariaDisciplina}"></td>
+                            <td data-label="Curso" th:text="${disciplina.curso != null ? disciplina.curso.nomeCurso : 'Sem curso'}"></td>
+                            <td data-label="Professor" th:text="${disciplina.professor != null ? disciplina.professor.nomeProfessor : 'Sem professor'}"></td>
+                            <td data-label="Acoes">
                                 <div class="inline-actions">
                                     <a class="btn btn-secondary" th:href="@{/disciplinas/editar/{id}(id=${disciplina.idDisciplina})}">Editar</a>
                                     <a class="btn btn-danger" th:href="@{/disciplinas/excluir/{id}(id=${disciplina.idDisciplina})}">Excluir</a>

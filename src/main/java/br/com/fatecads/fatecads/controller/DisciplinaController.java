@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.fatecads.fatecads.entity.Disciplina;
+import br.com.fatecads.fatecads.service.CursoService;
 import br.com.fatecads.fatecads.service.DisciplinaService;
+import br.com.fatecads.fatecads.service.ProfessorService;
 
 @Controller
 @RequestMapping("/disciplinas")
@@ -18,6 +20,12 @@ public class DisciplinaController {
 
     @Autowired
     private DisciplinaService disciplinaService;
+
+    @Autowired
+    private CursoService cursoService;
+
+    @Autowired
+    private ProfessorService professorService;
 
     @PostMapping("/salvar")
     public String salvar(@ModelAttribute Disciplina disciplina) {
@@ -34,12 +42,16 @@ public class DisciplinaController {
     @GetMapping("/criar")
     public String criar(Model model) {
         model.addAttribute("disciplina", new Disciplina());
+        model.addAttribute("cursos", cursoService.findAll());
+        model.addAttribute("professores", professorService.findAll());
         return "disciplina/formularioDisciplina";
     }
 
     @GetMapping("/editar/{id}")
     public String editar(@PathVariable Integer id, Model model) {
         model.addAttribute("disciplina", disciplinaService.findById(id));
+        model.addAttribute("cursos", cursoService.findAll());
+        model.addAttribute("professores", professorService.findAll());
         return "disciplina/formularioDisciplina";
     }
 

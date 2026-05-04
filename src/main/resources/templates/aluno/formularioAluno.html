@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Aluno</title>
-    <link rel="stylesheet" th:href="@{/css/bat-theme.css}" href="/css/bat-theme.css">
+    <link rel="stylesheet" th:href="@{/css/bat-theme.css(v=3)}" href="/css/bat-theme.css?v=3">
 </head>
 <body>
     <main class="page-shell">
@@ -21,7 +21,7 @@
                         <a class="btn btn-secondary" th:href="@{/alunos/listar}" href="/alunos/listar">Voltar para Listagem</a>
                     </div>
                 </div>
-                <img class="hero-logo" th:src="@{/img/batman-logo.png}" src="/img/batman-logo.png" alt="Logo do Batman">
+                <img class="hero-logo" th:src="@{/img/michael.png}" src="/img/michael.png" alt="Imagem decorativa de Michael">
             </div>
         </section>
 
@@ -64,13 +64,21 @@
                             <input id="raAluno" type="text" th:field="*{raAluno}" placeholder="Numero do registro academico" required>
                         </div>
 
+                        <div class="field">
+                            <label for="cursoAluno">Curso</label>
+                            <select id="cursoAluno" th:field="*{curso.idCurso}" required>
+                                <option value="" disabled>Selecione um curso</option>
+                                <option th:each="curso : ${cursos}" th:value="${curso.idCurso}" th:text="${curso.nomeCurso}"></option>
+                            </select>
+                        </div>
+
                         <div class="field field-full">
                             <label for="enderecoAluno">Endereco</label>
                             <input id="enderecoAluno" type="text" th:field="*{enderecoAluno}" placeholder="Rua, numero, bairro e cidade" required>
                         </div>
                     </div>
 
-                    <div class="form-actions" style="margin-top: 24px;">
+                    <div class="form-actions">
                         <input type="submit" value="Salvar Aluno">
                         <a class="btn btn-secondary" th:href="@{/fatecads}" href="/fatecads">Tela Inicial</a>
                     </div>
