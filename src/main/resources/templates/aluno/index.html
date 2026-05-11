@@ -23,6 +23,7 @@
                         <a class="btn btn-secondary" th:href="@{/cursos/listar}" href="/cursos/listar">Abrir Modulo de Cursos</a>
                         <a class="btn btn-secondary" th:href="@{/professores/listar}" href="/professores/listar">Abrir Modulo de Professores</a>
                         <a class="btn btn-secondary" th:href="@{/disciplinas/listar}" href="/disciplinas/listar">Abrir Modulo de Disciplinas</a>
+                        <a class="btn btn-secondary" th:href="@{/usuarios/listar}" href="/usuarios/listar">Abrir Modulo de Usuarios</a>
                     </div>
                 </div>
                 <img class="hero-logo" th:src="@{/img/batman-logo.png}" src="/img/batman-logo.png" alt="Logo do Batman">
@@ -36,7 +37,7 @@
                         Visual em alto contraste para destacar acoes importantes, listagens e formularios.
                     </p>
                     <ul class="feature-list">
-                        <li>Navegacao direta para alunos, cursos, professores e disciplinas</li>
+                        <li>Navegacao direta para alunos, cursos, professores, disciplinas e usuarios</li>
                         <li>Cadastro dedicado para professores</li>
                         <li>Cadastro dedicado para disciplinas</li>
                         <li>Paleta preto, branco, cinza e amarelo</li>
@@ -76,6 +77,7 @@
                     <a th:href="@{/cursos/listar}" href="/cursos/listar">Cursos <span>/cursos/listar</span></a>
                     <a th:href="@{/professores/listar}" href="/professores/listar">Professores <span>/professores/listar</span></a>
                     <a th:href="@{/disciplinas/listar}" href="/disciplinas/listar">Disciplinas <span>/disciplinas/listar</span></a>
+                    <a th:href="@{/usuarios/listar}" href="/usuarios/listar">Usuarios <span>/usuarios/listar</span></a>
                 </div>
             </aside>
 
@@ -112,6 +114,18 @@
                 <div class="toolbar">
                     <a class="btn btn-primary" th:href="@{/disciplinas/listar}" href="/disciplinas/listar">Ver Disciplinas</a>
                     <a class="btn btn-secondary" th:href="@{/disciplinas/criar}" href="/disciplinas/criar">Cadastrar Disciplina</a>
+                </div>
+            </article>
+
+            <article class="card span-12">
+                <p class="panel-caption">Acesso</p>
+                <h2 class="section-title">Modulo de Usuarios</h2>
+                <p class="section-subtitle">
+                    Cadastre usuarios com nome, email, login, senha e role para organizar os perfis de acesso do sistema.
+                </p>
+                <div class="toolbar">
+                    <a class="btn btn-primary" th:href="@{/usuarios/listar}" href="/usuarios/listar">Ver Usuarios</a>
+                    <a class="btn btn-secondary" th:href="@{/usuarios/criar}" href="/usuarios/criar">Cadastrar Usuario</a>
                 </div>
             </article>
         </section>

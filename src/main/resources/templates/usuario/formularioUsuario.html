@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Usuario</title>
+    <link rel="stylesheet" th:href="@{/css/bat-theme.css}" href="/css/bat-theme.css">
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero">
+            <div class="hero-brand">
+                <div class="hero-copy">
+                    <span class="eyebrow">Cadastro de Usuarios</span>
+                    <h1>Registrar ou Atualizar Usuario</h1>
+                    <p>
+                        Cadastre os dados de acesso do usuario com nome, email, login, senha e perfil de permissao.
+                    </p>
+                    <div class="hero-actions">
+                        <a class="btn btn-secondary" th:href="@{/usuarios/listar}" href="/usuarios/listar">Voltar para Listagem</a>
+                    </div>
+                </div>
+                <img class="hero-logo" th:src="@{/img/batman-logo.png}" src="/img/batman-logo.png" alt="Logo do Batman">
+            </div>
+        </section>
+
+        <section class="content-grid">
+            <article class="form-card span-7">
+                <div class="section-header">
+                    <div>
+                        <p class="panel-caption">Formulario</p>
+                        <h2 class="section-title">Dados do Usuario</h2>
+                    </div>
+                    <span class="badge" th:text="${usuario.idUsuario != null ? 'Modo Edicao' : 'Novo Cadastro'}">Novo Cadastro</span>
+                </div>
+
+                <form th:action="@{/usuarios/salvar}" method="post" th:object="${usuario}">
+                    <input type="hidden" th:field="*{idUsuario}">
+
+                    <div class="form-grid">
+                        <div class="field field-full">
+                            <label for="nomeUsuario">Nome</label>
+                            <input id="nomeUsuario" type="text" th:field="*{nomeUsuario}" placeholder="Nome completo do usuario" required>
+                        </div>
+
+                        <div class="field">
+                            <label for="emailUsuario">Email</label>
+                            <input id="emailUsuario" type="email" th:field="*{emailUsuario}" placeholder="usuario@email.com" required>
+                        </div>
+
+                        <div class="field">
+                            <label for="loginUsuario">Login</label>
+                            <input id="loginUsuario" type="text" th:field="*{loginUsuario}" placeholder="Login de acesso" required>
+                        </div>
+
+                        <div class="field">
+                            <label for="senhaUsuario">Senha</label>
+                            <input id="senhaUsuario" type="password" th:field="*{senhaUsuario}" placeholder="Senha de acesso" required>
+                        </div>
+
+                        <div class="field">
+                            <label for="role">Role</label>
+                            <select id="role" th:field="*{role}" required>
+                                <option value="" disabled>Selecione uma role</option>
+                                <option value="ROLE_ADMIN">ROLE_ADMIN</option>
+                                <option value="ROLE_USER">ROLE_USER</option>
+                                <option value="ROLE_PROFESSOR">ROLE_PROFESSOR</option>
+                                <option value="ROLE_ALUNO">ROLE_ALUNO</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-actions" style="margin-top: 24px;">
+                        <input type="submit" value="Salvar Usuario">
+                        <a class="btn btn-secondary" th:href="@{/fatecads}" href="/fatecads">Tela Inicial</a>
+                    </div>
+                </form>
+            </article>
+
+            <aside class="card span-5">
+                <p class="panel-caption">Diretrizes</p>
+                <h2 class="section-title">Checklist Rapido</h2>
+                <ul class="feature-list">
+                    <li>Nome, email, login, senha e role sao obrigatorios</li>
+                    <li>A mesma tela atende criacao e edicao</li>
+                    <li>Ao salvar, o fluxo retorna para a listagem de usuarios</li>
+                </ul>
+            </aside>
+        </section>
+    </main>
+</body>
+</html>

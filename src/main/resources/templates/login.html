@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" th:href="@{/css/bat-theme.css}" href="/css/bat-theme.css">
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero">
+            <div class="hero-brand">
+                <div class="hero-copy">
+                    <span class="eyebrow">Acesso ao Sistema</span>
+                    <h1>Login</h1>
+                    <p>
+                        Informe seu login e senha para acessar o painel de gestao academica.
+                    </p>
+                </div>
+                <img class="hero-logo" th:src="@{/img/batman-logo.png}" src="/img/batman-logo.png" alt="Logo do Batman">
+            </div>
+        </section>
+
+        <section class="content-grid">
+            <article class="form-card span-7">
+                <div class="section-header">
+                    <div>
+                        <p class="panel-caption">Autenticacao</p>
+                        <h2 class="section-title">Entrar</h2>
+                    </div>
+                    <span class="badge">Area Restrita</span>
+                </div>
+
+                <div class="empty-state" th:if="${param.error}">
+                    Login ou senha invalidos.
+                </div>
+
+                <div class="empty-state" th:if="${param.logout}">
+                    Logout realizado com sucesso.
+                </div>
+
+                <form th:action="@{/login}" method="post">
+                    <div class="form-grid">
+                        <div class="field field-full">
+                            <label for="username">Login</label>
+                            <input id="username" type="text" name="username" placeholder="Digite seu login" required>
+                        </div>
+
+                        <div class="field field-full">
+                            <label for="password">Senha</label>
+                            <input id="password" type="password" name="password" placeholder="Digite sua senha" required>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <input type="submit" value="Entrar">
+                        <a class="btn btn-secondary" th:href="@{/fatecads}" href="/fatecads">Tela Inicial</a>
+                    </div>
+                </form>
+            </article>
+
+            <aside class="card span-5">
+                <p class="panel-caption">Usuario</p>
+                <h2 class="section-title">Acesso</h2>
+                <ul class="feature-list">
+                    <li>Use o login cadastrado no modulo de usuarios</li>
+                    <li>A senha sera validada pelo Spring Security</li>
+                    <li>O formulario envia os dados para a rota /login</li>
+                </ul>
+            </aside>
+        </section>
+    </main>
+</body>
+</html>

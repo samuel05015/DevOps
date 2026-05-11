@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listagem de Usuarios</title>
+    <link rel="stylesheet" th:href="@{/css/bat-theme.css}" href="/css/bat-theme.css">
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero">
+            <div class="hero-brand">
+                <div class="hero-copy">
+                    <span class="eyebrow">Controle de Acesso</span>
+                    <h1>Base de Usuarios</h1>
+                    <p>
+                        Consulte os usuarios cadastrados, edite dados de acesso e mantenha os perfis organizados.
+                    </p>
+                </div>
+                <img class="hero-logo" th:src="@{/img/batman-logo.png}" src="/img/batman-logo.png" alt="Logo do Batman">
+            </div>
+
+            <div class="hero-grid">
+                <aside class="stat-card">
+                    <span class="panel-caption">Operacoes</span>
+                    <strong th:text="${#lists.size(usuarios)}">0</strong>
+                    <p class="helper-text">Quantidade de usuarios atualmente carregada na listagem.</p>
+                    <div class="hero-actions">
+                        <a class="btn btn-primary" th:href="@{/usuarios/criar}" href="/usuarios/criar">Novo Usuario</a>
+                        <a class="btn btn-secondary" th:href="@{/fatecads}" href="/fatecads">Painel Inicial</a>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <section class="content-grid">
+            <article class="table-card span-12">
+                <div class="section-header">
+                    <div>
+                        <p class="panel-caption">Listagem</p>
+                        <h2 class="section-title">Usuarios Cadastrados</h2>
+                    </div>
+                    <div class="toolbar">
+                        <a class="btn btn-primary" th:href="@{/usuarios/criar}" href="/usuarios/criar">Criar Novo Usuario</a>
+                    </div>
+                </div>
+
+                <div class="empty-state" th:if="${#lists.isEmpty(usuarios)}">
+                    Nenhum usuario cadastrado ainda. Use o botao acima para iniciar o primeiro registro.
+                </div>
+
+                <table th:if="${not #lists.isEmpty(usuarios)}">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Login</th>
+                            <th>Role</th>
+                            <th>Acoes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="usuario : ${usuarios}">
+                            <td data-label="Nome" th:text="${usuario.nomeUsuario}"></td>
+                            <td data-label="Email" th:text="${usuario.emailUsuario}"></td>
+                            <td data-label="Login" th:text="${usuario.loginUsuario}"></td>
+                            <td data-label="Role" th:text="${usuario.role}"></td>
+                            <td data-label="Acoes">
+                                <div class="inline-actions">
+                                    <a class="btn btn-secondary" th:href="@{/usuarios/editar/{id}(id=${usuario.idUsuario})}">Editar</a>
+                                    <a class="btn btn-danger" th:href="@{/usuarios/excluir/{id}(id=${usuario.idUsuario})}">Excluir</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </article>
+        </section>
+    </main>
+</body>
+</html>
