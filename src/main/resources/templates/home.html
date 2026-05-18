@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Inicial</title>
+
+    <link rel="stylesheet" th:href="@{/css/bat-theme.css}" href="/css/bat-theme.css">
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero">
+            <div class="hero-brand">
+                <div class="hero-copy">
+                    <span class="eyebrow">Fatec ADS</span>
+
+                    <h1>Painel Inicial</h1>
+
+                    <p>Escolha um módulo para gerenciar os dados acadêmicos.</p>
+                </div>
+
+                <img 
+                    class="hero-logo" 
+                    th:src="@{/img/batman-logo.png}" 
+                    src="/img/batman-logo.png" 
+                    alt="Logo do Batman"
+                >
+            </div>
+        </section>
+
+        <section class="content-grid">
+            <article class="card span-6">
+                <p class="panel-caption">Cadastros</p>
+
+                <h2 class="section-title">Alunos</h2>
+
+                <p>Consulte, cadastre e edite alunos.</p>
+
+                <div class="form-actions">
+                    <a 
+                        class="btn btn-primary" 
+                        th:href="@{/alunos/listar}" 
+                        href="/alunos/listar"
+                    >
+                        Acessar Alunos
+                    </a>
+                </div>
+            </article>
+
+            <article class="card span-6">
+                <p class="panel-caption">Cadastros</p>
+
+                <h2 class="section-title">Professores</h2>
+
+                <p>Consulte, cadastre e edite professores.</p>
+
+                <div class="form-actions">
+                    <a 
+                        class="btn btn-primary" 
+                        th:href="@{/professores/listar}" 
+                        href="/professores/listar"
+                    >
+                        Acessar Professores
+                    </a>
+                </div>
+            </article>
+
+            <article class="card span-6">
+                <p class="panel-caption">Acadêmico</p>
+
+                <h2 class="section-title">Cursos</h2>
+
+                <p>Gerencie os cursos disponíveis.</p>
+
+                <div class="form-actions">
+                    <a 
+                        class="btn btn-primary" 
+                        th:href="@{/cursos/listar}" 
+                        href="/cursos/listar"
+                    >
+                        Acessar Cursos
+                    </a>
+                </div>
+            </article>
+
+            <article class="card span-6">
+                <p class="panel-caption">Acadêmico</p>
+
+                <h2 class="section-title">Disciplinas</h2>
+
+                <p>Gerencie disciplinas e cargas horárias.</p>
+
+                <div class="form-actions">
+                    <a 
+                        class="btn btn-primary" 
+                        th:href="@{/disciplinas/listar}" 
+                        href="/disciplinas/listar"
+                    >
+                        Acessar Disciplinas
+                    </a>
+                </div>
+            </article>
+
+            <article class="card span-6">
+                <p class="panel-caption">Sistema</p>
+
+                <h2 class="section-title">Usuários</h2>
+
+                <p>Cadastre logins e permissões de acesso.</p>
+
+                <div class="form-actions">
+                    <a 
+                        class="btn btn-primary" 
+                        th:href="@{/usuarios/listar}" 
+                        href="/usuarios/listar"
+                    >
+                        Acessar Usuários
+                    </a>
+                </div>
+            </article>
+
+            <article class="card span-6">
+                <p class="panel-caption">Sessão</p>
+
+                <h2 class="section-title">Sair</h2>
+
+                <p>Encerre o acesso atual ao sistema.</p>
+
+                <form th:action="@{/logout}" action="/logout" method="post" class="form-actions">
+                    <input class="btn btn-secondary" type="submit" value="Logout">
+                </form>
+            </article>
+        </section>
+    </main>
+</body>
+</html>

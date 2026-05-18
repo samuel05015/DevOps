@@ -14,7 +14,7 @@ public class FatecAdsController {
     
     @GetMapping({"", "/"})
     public String index(){
-        return "aluno/index";
+        return "home";
     }
     
 }

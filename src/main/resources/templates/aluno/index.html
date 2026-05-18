@@ -3,131 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistemas FatecADS</title>
+    <title>Login</title>
     <link rel="stylesheet" th:href="@{/css/bat-theme.css}" href="/css/bat-theme.css">
 </head>
 <body>
-    <main class="page-shell home-shell">
-        <img class="home-left-figure" th:src="@{/img/willsmith.png}" src="/img/willsmith.png" alt="Will Smith decorativo">
+    <main class="page-shell">
         <section class="hero">
             <div class="hero-brand">
                 <div class="hero-copy">
-                    <span class="eyebrow">FatecADS Control</span>
-                    <h1>Painel Tatico de Gestao Academica</h1>
+                    <span class="eyebrow">Acesso ao Sistema</span>
+                    <h1>Login</h1>
                     <p>
-                        Uma interface com clima urbano noturno para acompanhar cadastros, manter a base organizada
-                        e entrar rapido nos modulos de alunos e cursos.
+                        Informe seu login e senha para acessar o painel de gestao academica.
                     </p>
-                    <div class="hero-actions">
-                        <a class="btn btn-primary" th:href="@{/alunos/listar}" href="/alunos/listar">Abrir Modulo de Alunos</a>
-                        <a class="btn btn-secondary" th:href="@{/cursos/listar}" href="/cursos/listar">Abrir Modulo de Cursos</a>
-                        <a class="btn btn-secondary" th:href="@{/professores/listar}" href="/professores/listar">Abrir Modulo de Professores</a>
-                        <a class="btn btn-secondary" th:href="@{/disciplinas/listar}" href="/disciplinas/listar">Abrir Modulo de Disciplinas</a>
-                        <a class="btn btn-secondary" th:href="@{/usuarios/listar}" href="/usuarios/listar">Abrir Modulo de Usuarios</a>
-                    </div>
                 </div>
                 <img class="hero-logo" th:src="@{/img/batman-logo.png}" src="/img/batman-logo.png" alt="Logo do Batman">
-            </div>
-
-            <div class="hero-grid">
-                <aside class="stat-card">
-                    <span class="panel-caption">Status do Sistema</span>
-                    <strong>Online</strong>
-                    <p class="helper-text">
-                        Visual em alto contraste para destacar acoes importantes, listagens e formularios.
-                    </p>
-                    <ul class="feature-list">
-                        <li>Navegacao direta para alunos, cursos, professores, disciplinas e usuarios</li>
-                        <li>Cadastro dedicado para professores</li>
-                        <li>Cadastro dedicado para disciplinas</li>
-                        <li>Paleta preto, branco, cinza e amarelo</li>
-                        <li>Layout responsivo para desktop e celular</li>
-                    </ul>
-                </aside>
             </div>
         </section>
 
         <section class="content-grid">
-            <article class="card span-7">
-                <p class="panel-caption">Central</p>
-                <h2 class="section-title">Acesso Rapido</h2>
-                <p class="section-subtitle">
-                    Entre no gerenciamento de alunos para cadastrar, editar, excluir e revisar os dados da turma.
-                </p>
-                <div class="toolbar">
-                    <a class="btn btn-primary" th:href="@{/alunos/listar}" href="/alunos/listar">Ver Alunos</a>
-                    <a class="btn btn-secondary" th:href="@{/alunos/criar}" href="/alunos/criar">Cadastrar Aluno</a>
-                </div>
-                <div class="card-brand">
-                    <img th:src="@{/img/batman-logo.png}" src="/img/batman-logo.png" alt="Simbolo do Batman">
+            <article class="form-card span-7">
+                <div class="section-header">
                     <div>
-                        <span>Tema Gotham</span>
-                        <p class="helper-text">O logo reforca a identidade visual usada em todo o painel academico.</p>
+                        <p class="panel-caption">Autenticacao</p>
+                        <h2 class="section-title">Entrar</h2>
                     </div>
+                    <span class="badge">Area Restrita</span>
                 </div>
+
+                <div class="empty-state" th:if="${param.error}">
+                    Login ou senha invalidos.
+                </div>
+
+                <div class="empty-state" th:if="${param.logout}">
+                    Logout realizado com sucesso.
+                </div>
+
+                <form th:action="@{/login}" method="post">
+                    <div class="form-grid">
+                        <div class="field field-full">
+                            <label for="username">Login</label>
+                            <input id="username" type="text" name="username" placeholder="Digite seu login" required>
+                        </div>
+
+                        <div class="field field-full">
+                            <label for="password">Senha</label>
+                            <input id="password" type="password" name="password" placeholder="Digite sua senha" required>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <input type="submit" value="Entrar">
+                        <a class="btn btn-secondary" th:href="@{/fatecads}" href="/fatecads">Tela Inicial</a>
+                    </div>
+                </form>
             </article>
 
             <aside class="card span-5">
-                <p class="panel-caption">Atalhos</p>
-                <h2 class="section-title">Rotas Principais</h2>
-                <div class="quick-links">
-                    <a th:href="@{/fatecads}" href="/fatecads">Tela inicial <span>/fatecads</span></a>
-                    <a th:href="@{/alunos/listar}" href="/alunos/listar">Listagem <span>/alunos/listar</span></a>
-                    <a th:href="@{/alunos/criar}" href="/alunos/criar">Formulario <span>/alunos/criar</span></a>
-                    <a th:href="@{/cursos/listar}" href="/cursos/listar">Cursos <span>/cursos/listar</span></a>
-                    <a th:href="@{/professores/listar}" href="/professores/listar">Professores <span>/professores/listar</span></a>
-                    <a th:href="@{/disciplinas/listar}" href="/disciplinas/listar">Disciplinas <span>/disciplinas/listar</span></a>
-                    <a th:href="@{/usuarios/listar}" href="/usuarios/listar">Usuarios <span>/usuarios/listar</span></a>
-                </div>
+                <p class="panel-caption">Usuario</p>
+                <h2 class="section-title">Acesso</h2>
+                <ul class="feature-list">
+                    <li>Use o login cadastrado no modulo de usuarios</li>
+                    <li>A senha sera validada pelo Spring Security</li>
+                    <li>O formulario envia os dados para a rota /login</li>
+                </ul>
             </aside>
-
-            <article class="card span-12">
-                <p class="panel-caption">Expansao</p>
-                <h2 class="section-title">Modulo de Cursos</h2>
-                <p class="section-subtitle">
-                    A mesma experiencia de CRUD agora esta disponivel para cursos, com listagem, cadastro, edicao e exclusao.
-                </p>
-                <div class="toolbar">
-                    <a class="btn btn-primary" th:href="@{/cursos/listar}" href="/cursos/listar">Ver Cursos</a>
-                    <a class="btn btn-secondary" th:href="@{/cursos/criar}" href="/cursos/criar">Cadastrar Curso</a>
-                </div>
-            </article>
-
-            <article class="card span-12">
-                <p class="panel-caption">Equipe</p>
-                <h2 class="section-title">Modulo de Professores</h2>
-                <p class="section-subtitle">
-                    Cadastre professores com nome, telefone, graduacao e RM usando a mesma experiencia de CRUD do restante do sistema.
-                </p>
-                <div class="toolbar">
-                    <a class="btn btn-primary" th:href="@{/professores/listar}" href="/professores/listar">Ver Professores</a>
-                    <a class="btn btn-secondary" th:href="@{/professores/criar}" href="/professores/criar">Cadastrar Professor</a>
-                </div>
-            </article>
-
-            <article class="card span-12">
-                <p class="panel-caption">Curriculo</p>
-                <h2 class="section-title">Modulo de Disciplinas</h2>
-                <p class="section-subtitle">
-                    Gerencie disciplinas com nome, sigla e carga horaria em um CRUD alinhado aos outros modulos academicos.
-                </p>
-                <div class="toolbar">
-                    <a class="btn btn-primary" th:href="@{/disciplinas/listar}" href="/disciplinas/listar">Ver Disciplinas</a>
-                    <a class="btn btn-secondary" th:href="@{/disciplinas/criar}" href="/disciplinas/criar">Cadastrar Disciplina</a>
-                </div>
-            </article>
-
-            <article class="card span-12">
-                <p class="panel-caption">Acesso</p>
-                <h2 class="section-title">Modulo de Usuarios</h2>
-                <p class="section-subtitle">
-                    Cadastre usuarios com nome, email, login, senha e role para organizar os perfis de acesso do sistema.
-                </p>
-                <div class="toolbar">
-                    <a class="btn btn-primary" th:href="@{/usuarios/listar}" href="/usuarios/listar">Ver Usuarios</a>
-                    <a class="btn btn-secondary" th:href="@{/usuarios/criar}" href="/usuarios/criar">Cadastrar Usuario</a>
-                </div>
-            </article>
         </section>
     </main>
 </body>
