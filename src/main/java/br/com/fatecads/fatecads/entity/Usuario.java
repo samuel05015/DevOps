@@ -1,5 +1,7 @@
 package br.com.fatecads.fatecads.entity;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -34,4 +36,9 @@ public class Usuario {
 
     @Column(nullable = false, length = 30)
     private String role = "ROLE_USER";
+
+    @Column(length = 100)
+    private String resetTokenSenha;
+
+    private LocalDateTime resetTokenExpiracao;
 }

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperar Senha</title>
+    <link rel="stylesheet" th:href="@{/css/bat-theme.css}" href="/css/bat-theme.css">
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero">
+            <div class="hero-brand">
+                <div class="hero-copy">
+                    <span class="eyebrow">Nova Senha</span>
+                    <h1>Recuperar Senha</h1>
+                    <p>
+                        Crie uma nova senha usando o link enviado para o email cadastrado.
+                    </p>
+                </div>
+                <img class="hero-logo" th:src="@{/img/batman-logo.png}" src="/img/batman-logo.png" alt="Logo do Batman">
+            </div>
+        </section>
+
+        <section class="content-grid">
+            <article class="form-card span-7">
+                <div class="section-header">
+                    <div>
+                        <p class="panel-caption">Alteracao</p>
+                        <h2 class="section-title">Trocar Senha</h2>
+                    </div>
+                    <span class="badge" th:text="${loginUsuario}">Usuario</span>
+                </div>
+
+                <div class="empty-state" th:if="${erro}" th:text="${erro}">
+                    As senhas nao sao iguais.
+                </div>
+
+                <form th:action="@{/recuperar-senha}" method="post">
+                    <input type="hidden" name="token" th:value="${token}">
+
+                    <div class="form-grid">
+                        <div class="field field-full">
+                            <label for="novaSenha">Nova Senha</label>
+                            <input id="novaSenha" type="password" name="novaSenha" placeholder="Digite a nova senha" required>
+                        </div>
+
+                        <div class="field field-full">
+                            <label for="confirmarSenha">Confirmar Senha</label>
+                            <input id="confirmarSenha" type="password" name="confirmarSenha" placeholder="Repita a nova senha" required>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <input type="submit" value="Salvar Nova Senha">
+                        <a class="btn btn-secondary" th:href="@{/login}" href="/login">Cancelar</a>
+                    </div>
+                </form>
+            </article>
+
+            <aside class="card span-5">
+                <p class="panel-caption">Seguranca</p>
+                <h2 class="section-title">Confirmacao</h2>
+                <ul class="feature-list">
+                    <li>A senha e salva com a criptografia usada pelo login</li>
+                    <li>Os dois campos precisam ter exatamente o mesmo valor</li>
+                    <li>Depois da troca, o link de recuperacao nao pode ser usado de novo</li>
+                </ul>
+            </aside>
+        </section>
+    </main>
+</body>
+</html>

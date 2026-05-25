@@ -39,6 +39,10 @@
                     Logout realizado com sucesso.
                 </div>
 
+                <div class="empty-state" th:if="${param.senhaAlterada}">
+                    Senha alterada com sucesso. Entre usando sua nova senha.
+                </div>
+
                 <form th:action="@{/login}" method="post">
                     <div class="form-grid">
                         <div class="field field-full">
@@ -54,6 +58,7 @@
 
                     <div class="form-actions">
                         <input type="submit" value="Entrar">
+                        <a class="btn btn-secondary" th:href="@{/esqueci-senha}" href="/esqueci-senha">Esqueci a senha</a>
                         <a class="btn btn-secondary" th:href="@{/fatecads}" href="/fatecads">Tela Inicial</a>
                     </div>
                 </form>

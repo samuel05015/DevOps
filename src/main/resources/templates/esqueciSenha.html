@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esqueci a Senha</title>
+    <link rel="stylesheet" th:href="@{/css/bat-theme.css}" href="/css/bat-theme.css">
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero">
+            <div class="hero-brand">
+                <div class="hero-copy">
+                    <span class="eyebrow">Recuperacao de Acesso</span>
+                    <h1>Esqueci a Senha</h1>
+                    <p>
+                        Informe o login e o email cadastrados para receber o link de troca de senha.
+                    </p>
+                </div>
+                <img class="hero-logo" th:src="@{/img/batman-logo.png}" src="/img/batman-logo.png" alt="Logo do Batman">
+            </div>
+        </section>
+
+        <section class="content-grid">
+            <article class="form-card span-7">
+                <div class="section-header">
+                    <div>
+                        <p class="panel-caption">Validacao</p>
+                        <h2 class="section-title">Conferir Email</h2>
+                    </div>
+                    <span class="badge">Conta</span>
+                </div>
+
+                <div class="empty-state" th:if="${erro}" th:text="${erro}">
+                    Login e email nao conferem.
+                </div>
+
+                <div class="empty-state" th:if="${mensagem}" th:text="${mensagem}">
+                    Enviamos um link de recuperacao para o email cadastrado.
+                </div>
+
+                <form th:action="@{/esqueci-senha}" method="post">
+                    <div class="form-grid">
+                        <div class="field field-full">
+                            <label for="loginUsuario">Login</label>
+                            <input id="loginUsuario" type="text" name="loginUsuario" placeholder="Digite seu login" required>
+                        </div>
+
+                        <div class="field field-full">
+                            <label for="emailUsuario">Email</label>
+                            <input id="emailUsuario" type="email" name="emailUsuario" placeholder="Digite o email cadastrado" required>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <input type="submit" value="Enviar Link">
+                        <a class="btn btn-secondary" th:href="@{/login}" href="/login">Voltar ao Login</a>
+                    </div>
+                </form>
+            </article>
+
+            <aside class="card span-5">
+                <p class="panel-caption">Conferencia</p>
+                <h2 class="section-title">Email Cadastrado</h2>
+                <ul class="feature-list">
+                    <li>O login precisa existir no cadastro de usuarios</li>
+                    <li>O email informado deve ser o mesmo salvo para esse login</li>
+                    <li>O link de recuperacao sera enviado para o Gmail cadastrado</li>
+                    <li>O link expira em 30 minutos</li>
+                </ul>
+            </aside>
+        </section>
+    </main>
+</body>
+</html>
