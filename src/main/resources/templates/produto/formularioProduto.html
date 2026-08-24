@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Produtos</title>
+    <link rel="stylesheet" th:href="@{/css/bat-theme.css}" href="/css/bat-theme.css">
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero">
+            <span class="eyebrow">Produtos</span>
+            <h1>Cadastro de Produto</h1>
+            <p>Preencha os dados para cadastrar ou atualizar um produto.</p>
+        </section>
+
+        <form class="form-card form-grid" th:action="@{/produtos/salvar}" method="post" th:object="${produto}" style="margin-top: 28px;">
+            <input type="hidden" th:field="*{idProduto}">
+            <div class="field field-full">
+                <label for="descricaoProduto">Descrição</label>
+                <input type="text" id="descricaoProduto" th:field="*{descricaoProduto}" required>
+            </div>
+            <div class="field">
+                <label for="valorProduto">Valor</label>
+                <input type="number" id="valorProduto" th:field="*{valorProduto}" min="0" step="0.01" required>
+            </div>
+            <div class="field">
+                <label for="unidadeProduto">Unidade</label>
+                <input type="text" id="unidadeProduto" th:field="*{unidadeProduto}" required>
+            </div>
+            <div class="field field-full">
+                <label for="marcaProduto">Marca</label>
+                <input type="text" id="marcaProduto" th:field="*{marcaProduto}" required>
+            </div>
+            <div class="form-actions field-full">
+                <input type="submit" value="Salvar produto">
+                <a class="btn btn-secondary" th:href="@{/produtos/listar}">Cancelar</a>
+            </div>
+        </form>
+    </main>
+</body>
+</html>

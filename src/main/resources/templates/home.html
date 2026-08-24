@@ -19,12 +19,6 @@
                     <p>Escolha um módulo para gerenciar os dados acadêmicos.</p>
                 </div>
 
-                <img 
-                    class="hero-logo" 
-                    th:src="@{/img/batman-logo.png}" 
-                    src="/img/batman-logo.png" 
-                    alt="Logo do Batman"
-                >
             </div>
         </section>
 
@@ -97,6 +91,34 @@
                         href="/disciplinas/listar"
                     >
                         Acessar Disciplinas
+                    </a>
+                </div>
+            </article>
+
+            <article class="card span-6">
+                <p class="panel-caption">Vendas</p>
+
+                <h2 class="section-title">Produtos</h2>
+
+                <p>Cadastre e gerencie os produtos disponíveis.</p>
+
+                <div class="form-actions">
+                    <a class="btn btn-primary" th:href="@{/produtos/listar}" href="/produtos/listar">
+                        Acessar Produtos
+                    </a>
+                </div>
+            </article>
+
+            <article class="card span-6">
+                <p class="panel-caption">Vendas</p>
+
+                <h2 class="section-title">Pedidos</h2>
+
+                <p>Consulte os pedidos salvos ou registre um novo.</p>
+
+                <div class="form-actions">
+                    <a class="btn btn-primary" th:href="@{/pedidos/listar}" href="/pedidos/listar">
+                        Acessar Pedidos
                     </a>
                 </div>
             </article>

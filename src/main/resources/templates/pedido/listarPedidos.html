@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Pedidos</title>
+    <link rel="stylesheet" th:href="@{/css/bat-theme.css}" href="/css/bat-theme.css">
+</head>
+<body>
+<main class="page-shell">
+    <section class="hero">
+        <span class="eyebrow">Pedidos</span>
+        <h1>Pedidos cadastrados</h1>
+        <p>Consulte os pedidos registrados no sistema.</p>
+        <div class="form-actions">
+            <a class="btn btn-primary" th:href="@{/pedidos/criar}">Novo pedido</a>
+            <a class="btn btn-secondary" th:href="@{/home}">Voltar ao início</a>
+        </div>
+    </section>
+
+    <section class="table-card" style="margin-top: 28px;">
+        <table>
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Data</th>
+                    <th>Aluno</th>
+                    <th>Itens</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="pedido : ${pedidos}">
+                    <td th:text="${pedido.idPedido}"></td>
+                    <td th:text="${#temporals.format(pedido.dataPedido, 'dd/MM/yyyy')}"></td>
+                    <td th:text="${pedido.aluno.nomeAluno}"></td>
+                    <td th:text="${#lists.size(pedido.itens)}"></td>
+                    <td th:text="${#numbers.formatCurrency(pedido.totalPedido)}"></td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(pedidos)}">
+                    <td colspan="5" class="empty-state">Nenhum pedido cadastrado.</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+</body>
+</html>

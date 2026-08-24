@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Produtos</title>
+    <link rel="stylesheet" th:href="@{/css/bat-theme.css}" href="/css/bat-theme.css">
+</head>
+<body>
+<main class="page-shell">
+    <section class="hero">
+        <span class="eyebrow">Produtos</span>
+        <h1>Produtos cadastrados</h1>
+        <p>Consulte e gerencie os produtos disponíveis.</p>
+        <div class="form-actions">
+            <a class="btn btn-primary" th:href="@{/produtos/criar}" href="/produtos/criar">Novo produto</a>
+            <a class="btn btn-secondary" th:href="@{/home}">Voltar ao início</a>
+        </div>
+    </section>
+    <section class="table-card" style="margin-top: 28px;">
+    <table>
+        <thead>
+        <tr>
+            <th>Descrição</th>
+            <th>Valor</th>
+            <th>Unidade</th>
+            <th>Marca</th>
+            <th colspan="2">Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="produto : ${produtos}">
+            <td th:text="${produto.descricaoProduto}"></td>
+            <td th:text="${produto.valorProduto}"></td>
+            <td th:text="${produto.unidadeProduto}"></td>
+            <td th:text="${produto.marcaProduto}"></td>
+            <td><a class="btn btn-secondary" th:href="@{/produtos/editar/{id}(id=${produto.idProduto})}">Editar</a></td>
+            <td><a class="btn btn-danger" th:href="@{/produtos/excluir/{id}(id=${produto.idProduto})}" onclick="return confirm('Tem certeza que deseja excluir este produto?')">Excluir</a></td>
+        </tr>
+        </tbody>
+    </table>
+    </section>
+</main>
+</body>
+</html>
