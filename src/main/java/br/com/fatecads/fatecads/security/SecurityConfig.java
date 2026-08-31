@@ -19,11 +19,11 @@ public class SecurityConfig {
                                 .authorizeHttpRequests(auth -> auth
                                                 .requestMatchers(
                                                                 "/login",
+                                                                "/cadastro",
                                                                 "/esqueci-senha",
                                                                 "/recuperar-senha",
                                                                 "/css/**",
-                                                                "/img/**",
-                                                                "/usuarios/**")
+                                                                "/img/**")
                                                 .permitAll()
                                                 .anyRequest().authenticated())
                                 .formLogin(form -> form

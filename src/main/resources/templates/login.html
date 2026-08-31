@@ -42,6 +42,10 @@
                     Senha alterada com sucesso. Entre usando sua nova senha.
                 </div>
 
+                <div class="empty-state" th:if="${param.cadastroSucesso}" th:text="${mensagem}">
+                    Conta criada. Entre com seu novo login e senha.
+                </div>
+
                 <form th:action="@{/login}" method="post">
                     <div class="form-grid">
                         <div class="field field-full">
@@ -57,6 +61,7 @@
 
                     <div class="form-actions">
                         <input type="submit" value="Entrar">
+                        <a class="btn btn-primary" th:href="@{/cadastro}" href="/cadastro">Criar nova conta</a>
                         <a class="btn btn-secondary" th:href="@{/esqueci-senha}" href="/esqueci-senha">Esqueci a senha</a>
                         <a class="btn btn-secondary" th:href="@{/fatecads}" href="/fatecads">Tela Inicial</a>
                     </div>

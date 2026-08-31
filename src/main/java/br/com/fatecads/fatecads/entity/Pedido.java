@@ -35,7 +35,7 @@ public class Pedido {
     @JoinColumn(name = "idAluno_fk")
     private Aluno aluno;
 
-    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemDoPedido> itens;
 
     //Método para calcular o total do pedido

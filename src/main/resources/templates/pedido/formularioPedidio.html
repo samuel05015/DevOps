@@ -12,29 +12,31 @@
 <main class="page-shell">
     <datalist id="listaAlunos">
         <option th:each="aluno : ${alunos}" 
-        th:value="${aluno.idAluno + ' - ' + aluno.nomeAluno}">
+        th:value="${aluno.idAluno + ' - ' + aluno.nomeAluno}"
+        th:attr="data-id=${aluno.idAluno}">
     </option>
     </datalist>
 
     <datalist id="listaProdutos">
         <option th:each="produto : ${produtos}" 
         th:value="${produto.idProduto + ' - ' + produto.descricaoProduto}"
-        th:attr="data-preco=${produto.valorProduto}">
+        th:attr="data-id=${produto.idProduto},data-nome=${produto.descricaoProduto},data-preco=${produto.valorProduto}">
         </option>
     </datalist>
 
     <section class="hero">
         <span class="eyebrow">Pedidos</span>
-        <h1>Novo pedido</h1>
-        <p>Selecione o aluno e adicione os produtos desejados.</p>
-        <div class="form-actions"><a class="btn btn-secondary" th:href="@{/home}">Voltar ao início</a></div>
+        <h1 th:text="${pedido.idPedido == null ? 'Novo pedido' : 'Editar pedido #' + pedido.idPedido}">Novo pedido</h1>
+        <p th:text="${pedido.idPedido == null ? 'Selecione o aluno e adicione os produtos desejados.' : 'Altere o aluno ou os produtos do pedido.'}">Selecione o aluno e adicione os produtos desejados.</p>
+        <div class="form-actions"><a class="btn btn-secondary" th:href="@{/pedidos/listar}">Voltar aos pedidos</a></div>
     </section>
 
     <section class="form-card" style="margin-top: 28px;">
         <div class="form-grid">
             <div class="field field-full">
                 <label for="aluno">Aluno</label>
-                <input list="listaAlunos" id="aluno" type="text" placeholder="Digite o nome do aluno">
+                <input list="listaAlunos" id="aluno" type="text" placeholder="Digite o nome do aluno"
+                       th:value="${pedido.aluno != null ? pedido.aluno.idAluno + ' - ' + pedido.aluno.nomeAluno : ''}">
             </div>
             <div class="field">
                 <label for="produto">Produto</label>
@@ -74,12 +76,24 @@
         <strong>R$ <span id="totalPedido">0,00</span></strong>
     </div>
     <div class="form-actions">
-        <button class="btn btn-primary" type="button" onclick="salvarPedido()">Confirmar e salvar pedido</button>
+        <button class="btn btn-primary" type="button" onclick="salvarPedido()"
+                th:text="${pedido.idPedido == null ? 'Confirmar e salvar pedido' : 'Salvar alterações'}">Confirmar e salvar pedido</button>
     </div>
     </section>
 
-        <script>
+        <script th:inline="javascript">
+        const pedidoId = /*[[${pedido.idPedido}]]*/ null;
         let itens = [];
+
+        /*[# th:each="item : ${pedido.itens}"]*/
+        itens.push({
+            produto: { idProduto: /*[[${item.produto.idProduto}]]*/ 0 },
+            nomeProduto: /*[[${item.produto.descricaoProduto}]]*/ "",
+            quantidade: /*[[${item.quantidade}]]*/ 0,
+            preco: /*[[${item.preco}]]*/ 0,
+            subtotal: /*[[${item.subtotal}]]*/ 0
+        });
+        /*[/]*/
  
         function adicionarItem() {
             let produtoInput = document.getElementById("produto").value;
@@ -90,23 +104,17 @@
                 return;
             }
  
-            let partes = produtoInput.split(" - ");
-            let produtoId = partes[0];
-            let produtoNome = partes[1];
+            let options = Array.from(document.querySelectorAll("#listaProdutos option"));
+            let produtoSelecionado = options.find(opt => opt.value === produtoInput);
  
-            let options = document.querySelectorAll("#listaProdutos option");
-            let preco = null;
- 
-            options.forEach(opt => {
-                if (opt.value === produtoInput) {
-                    preco = opt.getAttribute("data-preco");
-                }
-            });
- 
-            if (!preco) {
+            if (!produtoSelecionado) {
                 alert("Produto inválido! Selecione um produto da lista.");
                 return;
             }
+
+            let produtoId = produtoSelecionado.dataset.id;
+            let produtoNome = produtoSelecionado.dataset.nome;
+            let preco = parseFloat(produtoSelecionado.dataset.preco);
  
             let subtotal = quantidade * preco;
  
@@ -170,9 +178,18 @@
                 return;
             }
  
-            let alunoId = alunoInput.split(" - ")[0];
+            let alunoSelecionado = Array.from(document.querySelectorAll("#listaAlunos option"))
+                .find(opt => opt.value === alunoInput);
+
+            if (!alunoSelecionado) {
+                alert("Aluno inválido! Selecione um aluno da lista.");
+                return;
+            }
+
+            let alunoId = alunoSelecionado.dataset.id;
  
             let pedido = {
+                idPedido: pedidoId,
                 aluno: { idAluno: alunoId },
                 itens: itens
             };
@@ -189,7 +206,7 @@
             })
             .then(res => {
                 if (!res.ok) throw new Error("Erro HTTP " + res.status);
-                alert("Pedido salvo com sucesso!");
+                alert(pedidoId == null ? "Pedido salvo com sucesso!" : "Pedido atualizado com sucesso!");
                 window.location.href = "/pedidos/listar";
             })
             .catch(err => {
@@ -197,6 +214,8 @@
                 console.error(err);
             });
         }
+
+        renderTabela();
 </script>
 </main>
 </body>

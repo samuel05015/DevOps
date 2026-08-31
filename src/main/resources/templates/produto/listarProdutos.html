@@ -21,6 +21,7 @@
     <table>
         <thead>
         <tr>
+            <th>Imagem</th>
             <th>Descrição</th>
             <th>Valor</th>
             <th>Unidade</th>
@@ -30,6 +31,13 @@
         </thead>
         <tbody>
         <tr th:each="produto : ${produtos}">
+            <td>
+                <img class="product-thumbnail"
+                     th:if="${produto.imagemProduto != null and produto.imagemProduto.length > 0}"
+                     th:src="@{/produtos/imagem/{id}(id=${produto.idProduto})}"
+                     th:alt="${produto.descricaoProduto}">
+                <span th:unless="${produto.imagemProduto != null and produto.imagemProduto.length > 0}" class="helper-text">Sem imagem</span>
+            </td>
             <td th:text="${produto.descricaoProduto}"></td>
             <td th:text="${produto.valorProduto}"></td>
             <td th:text="${produto.unidadeProduto}"></td>

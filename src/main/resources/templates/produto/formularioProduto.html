@@ -14,7 +14,7 @@
             <p>Preencha os dados para cadastrar ou atualizar um produto.</p>
         </section>
 
-        <form class="form-card form-grid" th:action="@{/produtos/salvar}" method="post" th:object="${produto}" style="margin-top: 28px;">
+        <form class="form-card form-grid" th:action="@{/produtos/salvar}" method="post" enctype="multipart/form-data" th:object="${produto}" style="margin-top: 28px;">
             <input type="hidden" th:field="*{idProduto}">
             <div class="field field-full">
                 <label for="descricaoProduto">Descrição</label>
@@ -31,6 +31,15 @@
             <div class="field field-full">
                 <label for="marcaProduto">Marca</label>
                 <input type="text" id="marcaProduto" th:field="*{marcaProduto}" required>
+            </div>
+            <div class="field field-full">
+                <label for="imagem">Imagem do produto</label>
+                <input type="file" id="imagem" name="imagem" accept="image/*" th:required="${produto.idProduto == null}">
+                <span class="helper-text" th:if="${produto.idProduto != null}">Deixe em branco para manter a imagem atual.</span>
+                <img class="product-preview"
+                     th:if="${produto.idProduto != null and produto.imagemProduto != null and produto.imagemProduto.length > 0}"
+                     th:src="@{/produtos/imagem/{id}(id=${produto.idProduto})}"
+                     th:alt="${produto.descricaoProduto}">
             </div>
             <div class="form-actions field-full">
                 <input type="submit" value="Salvar produto">

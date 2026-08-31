@@ -40,6 +40,11 @@ public class UsuarioService {
         return usuarioRepository.findById(id).orElse(null);
     }
 
+    public boolean loginExists(String loginUsuario) {
+        return loginUsuario != null
+                && usuarioRepository.existsByLoginUsuarioIgnoreCase(loginUsuario.trim());
+    }
+
     public Optional<Usuario> findByLoginAndMatchingEmail(String loginUsuario, String emailUsuario) {
         if (loginUsuario == null || emailUsuario == null) {
             return Optional.empty();

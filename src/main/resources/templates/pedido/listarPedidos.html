@@ -18,30 +18,77 @@
         </div>
     </section>
 
-    <section class="table-card" style="margin-top: 28px;">
-        <table>
-            <thead>
-                <tr>
-                    <th>Código</th>
-                    <th>Data</th>
-                    <th>Aluno</th>
-                    <th>Itens</th>
-                    <th>Total</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="pedido : ${pedidos}">
-                    <td th:text="${pedido.idPedido}"></td>
-                    <td th:text="${#temporals.format(pedido.dataPedido, 'dd/MM/yyyy')}"></td>
-                    <td th:text="${pedido.aluno.nomeAluno}"></td>
-                    <td th:text="${#lists.size(pedido.itens)}"></td>
-                    <td th:text="${#numbers.formatCurrency(pedido.totalPedido)}"></td>
-                </tr>
-                <tr th:if="${#lists.isEmpty(pedidos)}">
-                    <td colspan="5" class="empty-state">Nenhum pedido cadastrado.</td>
-                </tr>
-            </tbody>
-        </table>
+    <section class="orders-list" style="margin-top: 28px;">
+        <article class="order-card" th:each="pedido : ${pedidos}">
+            <header class="order-card-header">
+                <div>
+                    <span class="order-code" th:text="${'Pedido #' + pedido.idPedido}">Pedido #1</span>
+                    <time class="order-date"
+                          th:datetime="${pedido.dataPedido}"
+                          th:text="${#temporals.format(pedido.dataPedido, 'dd/MM/yyyy')}">01/01/2026</time>
+                </div>
+                <div class="order-card-total">
+                    <span>Total</span>
+                    <strong th:text="${#numbers.formatCurrency(pedido.totalPedido)}">R$ 0,00</strong>
+                </div>
+            </header>
+
+            <div class="order-customer">
+                <span>Aluno</span>
+                <strong th:text="${pedido.aluno != null ? pedido.aluno.nomeAluno : 'Aluno não informado'}">Nome do aluno</strong>
+            </div>
+
+            <div class="order-products-header">
+                <h2>Produtos do pedido</h2>
+                <span class="badge" th:text="${#lists.size(pedido.itens) + ' item(ns)'}">1 item</span>
+            </div>
+
+            <div class="order-items">
+                <div class="order-item" th:each="item : ${pedido.itens}">
+                    <div class="order-item-image">
+                        <img th:if="${item.produto != null and item.produto.imagemProduto != null and item.produto.imagemProduto.length > 0}"
+                             th:src="@{/produtos/imagem/{id}(id=${item.produto.idProduto})}"
+                             th:alt="${item.produto.descricaoProduto}">
+                        <span th:unless="${item.produto != null and item.produto.imagemProduto != null and item.produto.imagemProduto.length > 0}">Sem imagem</span>
+                    </div>
+
+                    <div class="order-item-description">
+                        <strong th:text="${item.produto != null ? item.produto.descricaoProduto : 'Produto indisponível'}">Produto</strong>
+                        <span th:if="${item.produto != null}"
+                              th:text="${item.produto.marcaProduto + ' • ' + item.produto.unidadeProduto}">Marca • Unidade</span>
+                    </div>
+
+                    <div class="order-item-value">
+                        <span>Quantidade</span>
+                        <strong th:text="${item.quantidade}">1</strong>
+                    </div>
+
+                    <div class="order-item-value">
+                        <span>Preço unitário</span>
+                        <strong th:text="${#numbers.formatCurrency(item.preco)}">R$ 0,00</strong>
+                    </div>
+
+                    <div class="order-item-value order-item-subtotal">
+                        <span>Subtotal</span>
+                        <strong th:text="${#numbers.formatCurrency(item.subtotal)}">R$ 0,00</strong>
+                    </div>
+                </div>
+
+                <div class="empty-state" th:if="${#lists.isEmpty(pedido.itens)}">
+                    Nenhum produto encontrado neste pedido.
+                </div>
+            </div>
+
+            <footer class="order-card-actions">
+                <a class="btn btn-secondary" th:href="@{/pedidos/editar/{id}(id=${pedido.idPedido})}">Editar pedido</a>
+                <a class="btn btn-danger" th:href="@{/pedidos/excluir/{id}(id=${pedido.idPedido})}"
+                   onclick="return confirm('Tem certeza que deseja excluir este pedido?')">Excluir pedido</a>
+            </footer>
+        </article>
+
+        <div class="empty-state order-list-empty" th:if="${#lists.isEmpty(pedidos)}">
+            Nenhum pedido cadastrado.
+        </div>
     </section>
 </main>
 </body>

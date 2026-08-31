@@ -12,12 +12,14 @@
             <div class="hero-brand">
                 <div class="hero-copy">
                     <span class="eyebrow">Cadastro de Usuarios</span>
-                    <h1>Registrar ou Atualizar Usuario</h1>
-                    <p>
+                    <h1 th:text="${cadastroPublico ? 'Criar nova conta' : 'Registrar ou Atualizar Usuario'}">Registrar ou Atualizar Usuario</h1>
+                    <p th:text="${cadastroPublico ? 'Informe seus dados para criar um novo acesso ao sistema.' : 'Cadastre os dados de acesso do usuario com nome, email, login, senha e perfil de permissao.'}">
                         Cadastre os dados de acesso do usuario com nome, email, login, senha e perfil de permissao.
                     </p>
                     <div class="hero-actions">
-                        <a class="btn btn-secondary" th:href="@{/usuarios/listar}" href="/usuarios/listar">Voltar para Listagem</a>
+                        <a class="btn btn-secondary"
+                           th:href="${cadastroPublico} ? @{/login} : @{/usuarios/listar}"
+                           th:text="${cadastroPublico ? 'Voltar ao login' : 'Voltar para Listagem'}">Voltar para Listagem</a>
                     </div>
                 </div>
             </div>
@@ -33,8 +35,10 @@
                     <span class="badge" th:text="${usuario.idUsuario != null ? 'Modo Edicao' : 'Novo Cadastro'}">Novo Cadastro</span>
                 </div>
 
-                <form th:action="@{/usuarios/salvar}" method="post" th:object="${usuario}">
-                    <input type="hidden" th:field="*{idUsuario}">
+                <div class="empty-state" th:if="${erro}" th:text="${erro}"></div>
+
+                <form th:action="${cadastroPublico} ? @{/cadastro} : @{/usuarios/salvar}" method="post" th:object="${usuario}">
+                    <input th:unless="${cadastroPublico}" type="hidden" th:field="*{idUsuario}">
 
                     <div class="form-grid">
                         <div class="field field-full">
@@ -54,10 +58,10 @@
 
                         <div class="field">
                             <label for="senhaUsuario">Senha</label>
-                            <input id="senhaUsuario" type="password" th:field="*{senhaUsuario}" placeholder="Senha de acesso" required>
+                            <input id="senhaUsuario" type="password" th:field="*{senhaUsuario}" placeholder="Senha de acesso" minlength="6" required>
                         </div>
 
-                        <div class="field">
+                        <div class="field" th:unless="${cadastroPublico}">
                             <label for="role">Role</label>
                             <select id="role" th:field="*{role}" required>
                                 <option value="" disabled>Selecione uma role</option>
@@ -70,8 +74,10 @@
                     </div>
 
                     <div class="form-actions" style="margin-top: 24px;">
-                        <input type="submit" value="Salvar Usuario">
-                        <a class="btn btn-secondary" th:href="@{/fatecads}" href="/fatecads">Tela Inicial</a>
+                        <input type="submit" th:value="${cadastroPublico ? 'Criar conta' : 'Salvar Usuario'}" value="Salvar Usuario">
+                        <a class="btn btn-secondary"
+                           th:href="${cadastroPublico} ? @{/login} : @{/fatecads}"
+                           th:text="${cadastroPublico ? 'Cancelar' : 'Tela Inicial'}">Tela Inicial</a>
                     </div>
                 </form>
             </article>

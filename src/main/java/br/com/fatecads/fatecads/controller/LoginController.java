@@ -5,6 +5,7 @@ import org.springframework.mail.MailException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -28,6 +29,43 @@ public class LoginController {
     @GetMapping("/login")
     public String login() {
         return "login";
+    }
+
+    @GetMapping("/cadastro")
+    public String cadastro(Model model) {
+        model.addAttribute("usuario", new Usuario());
+        model.addAttribute("cadastroPublico", true);
+        return "usuario/formularioUsuario";
+    }
+
+    @PostMapping("/cadastro")
+    public String cadastrar(@ModelAttribute Usuario usuario, Model model,
+            RedirectAttributes redirectAttributes) {
+        usuario.setIdUsuario(null);
+        usuario.setNomeUsuario(usuario.getNomeUsuario() == null ? null : usuario.getNomeUsuario().trim());
+        usuario.setEmailUsuario(usuario.getEmailUsuario() == null ? null : usuario.getEmailUsuario().trim());
+        usuario.setLoginUsuario(usuario.getLoginUsuario() == null ? null : usuario.getLoginUsuario().trim());
+        usuario.setRole("ROLE_USER");
+        usuario.setResetTokenSenha(null);
+        usuario.setResetTokenExpiracao(null);
+
+        if (usuarioService.loginExists(usuario.getLoginUsuario())) {
+            model.addAttribute("usuario", usuario);
+            model.addAttribute("cadastroPublico", true);
+            model.addAttribute("erro", "Esse login ja esta sendo utilizado.");
+            return "usuario/formularioUsuario";
+        }
+
+        if (usuario.getSenhaUsuario() == null || usuario.getSenhaUsuario().length() < 6) {
+            model.addAttribute("usuario", usuario);
+            model.addAttribute("cadastroPublico", true);
+            model.addAttribute("erro", "A senha deve possuir pelo menos 6 caracteres.");
+            return "usuario/formularioUsuario";
+        }
+
+        usuarioService.save(usuario);
+        redirectAttributes.addFlashAttribute("mensagem", "Conta criada. Entre com seu novo login e senha.");
+        return "redirect:/login?cadastroSucesso";
     }
 
     @GetMapping("/home")

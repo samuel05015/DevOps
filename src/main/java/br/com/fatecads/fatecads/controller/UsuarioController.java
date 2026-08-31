@@ -34,12 +34,14 @@ public class UsuarioController {
     @GetMapping("/criar")
     public String criar(Model model) {
         model.addAttribute("usuario", new Usuario());
+        model.addAttribute("cadastroPublico", false);
         return "usuario/formularioUsuario";
     }
 
     @GetMapping("/editar/{id}")
     public String editar(@PathVariable Integer id, Model model) {
         model.addAttribute("usuario", usuarioService.findById(id));
+        model.addAttribute("cadastroPublico", false);
         return "usuario/formularioUsuario";
     }
 
