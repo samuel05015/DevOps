@@ -2,6 +2,7 @@ package br.com.fatecads.fatecads.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -68,9 +69,23 @@ public class LoginController {
         return "redirect:/login?cadastroSucesso";
     }
 
-    @GetMapping("/home")
-    public String home() {
+    @GetMapping({"/", "/home"})
+    public String home(Authentication authentication) {
+        if (!possuiPapel(authentication, "ROLE_ADMIN") && !possuiPapel(authentication, "ROLE_USER")) {
+            return "redirect:/login";
+        }
+        return possuiPapel(authentication, "ROLE_ADMIN") ? "redirect:/admin" : "redirect:/loja";
+    }
+
+    @GetMapping("/admin")
+    public String admin() {
         return "home";
+    }
+
+    @GetMapping("/acesso-negado")
+    public String acessoNegado(Model model, Authentication authentication) {
+        model.addAttribute("destino", possuiPapel(authentication, "ROLE_ADMIN") ? "/admin" : "/loja");
+        return "acessoNegado";
     }
 
     @GetMapping("/esqueci-senha")
@@ -144,6 +159,11 @@ public class LoginController {
                     "Nao foi possivel enviar o email. Confira o erro no console do sistema.");
             return "redirect:/esqueci-senha";
         }
+    }
+
+    private boolean possuiPapel(Authentication authentication, String papel) {
+        return authentication != null && authentication.getAuthorities().stream()
+                .anyMatch(authority -> authority.getAuthority().equals(papel));
     }
     
 }

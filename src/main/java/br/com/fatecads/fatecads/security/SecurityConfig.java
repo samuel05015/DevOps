@@ -18,6 +18,7 @@ public class SecurityConfig {
                                 
                                 .authorizeHttpRequests(auth -> auth
                                                 .requestMatchers(
+                                                                "/",
                                                                 "/login",
                                                                 "/cadastro",
                                                                 "/esqueci-senha",
@@ -25,11 +26,26 @@ public class SecurityConfig {
                                                                 "/css/**",
                                                                 "/img/**")
                                                 .permitAll()
+                                                .requestMatchers("/produtos/imagem/**")
+                                                .hasAnyRole("ADMIN", "USER")
+                                                .requestMatchers("/admin", "/admin/**", "/alunos/**", "/professores/**",
+                                                                "/cursos/**", "/disciplinas/**", "/produtos/**",
+                                                                "/pedidos/**", "/usuarios/**")
+                                                .hasRole("ADMIN")
+                                                .requestMatchers("/loja", "/loja/**")
+                                                .hasRole("USER")
                                                 .anyRequest().authenticated())
                                 .formLogin(form -> form
                                                 .loginPage("/login")
-                                                .defaultSuccessUrl("/home", true)
+                                                .successHandler((request, response, authentication) -> {
+                                                        boolean admin = authentication.getAuthorities().stream()
+                                                                        .anyMatch(authority -> authority.getAuthority()
+                                                                                        .equals("ROLE_ADMIN"));
+                                                        String destino = admin ? "/admin" : "/loja";
+                                                        response.sendRedirect(request.getContextPath() + destino);
+                                                })
                                                 .permitAll())
+                                .exceptionHandling(exception -> exception.accessDeniedPage("/acesso-negado"))
                                 .logout(logout -> logout
                                                 .logoutSuccessUrl("/login?logout")
                                                 .permitAll());

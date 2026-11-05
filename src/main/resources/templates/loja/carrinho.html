@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu carrinho</title>
+    <link rel="stylesheet" th:href="@{/css/bat-theme.css}" href="/css/bat-theme.css">
+</head>
+<body>
+<main class="page-shell">
+    <nav class="store-nav" aria-label="Navegação da loja">
+        <a class="store-brand" th:href="@{/loja}">Fatec ADS Store</a>
+        <a class="btn btn-secondary" th:href="@{/loja}">Continuar comprando</a>
+    </nav>
+
+    <section class="hero">
+        <span class="eyebrow">Área do usuário</span>
+        <h1>Meu carrinho</h1>
+        <p>Revise os itens. A finalização é apenas uma simulação e não gera cobrança.</p>
+    </section>
+
+    <div class="feedback feedback-success" role="status" th:if="${mensagem}" th:text="${mensagem}"></div>
+    <div class="feedback feedback-error" role="alert" th:if="${erro}" th:text="${erro}"></div>
+
+    <section class="cart-layout" th:if="${!carrinho.vazio}">
+        <div class="cart-items">
+            <article class="cart-item" th:each="item : ${carrinho.itens}">
+                <div class="cart-item-image">
+                    <img th:if="${item.temImagem}" th:src="@{/produtos/imagem/{id}(id=${item.idProduto})}" th:alt="${item.descricao}">
+                    <span th:unless="${item.temImagem}">Sem imagem</span>
+                </div>
+                <div class="cart-item-copy">
+                    <span class="product-meta" th:text="${item.marca + ' • ' + item.unidade}">Marca • Unidade</span>
+                    <h2 th:text="${item.descricao}">Produto</h2>
+                    <span th:text="${#numbers.formatCurrency(item.preco) + ' por unidade'}">R$ 0,00 por unidade</span>
+                </div>
+                <form class="cart-quantity" th:action="@{/loja/carrinho/atualizar/{id}(id=${item.idProduto})}" method="post">
+                    <label th:for="${'cart-quantidade-' + item.idProduto}">Quantidade</label>
+                    <input th:id="${'cart-quantidade-' + item.idProduto}" name="quantidade" type="number" min="0" th:value="${item.quantidade}" required>
+                    <button class="btn btn-secondary" type="submit">Atualizar</button>
+                </form>
+                <div class="cart-item-total">
+                    <span>Subtotal</span>
+                    <strong th:text="${#numbers.formatCurrency(item.subtotal)}">R$ 0,00</strong>
+                    <form th:action="@{/loja/carrinho/remover/{id}(id=${item.idProduto})}" method="post">
+                        <button class="text-button" type="submit">Remover</button>
+                    </form>
+                </div>
+            </article>
+        </div>
+
+        <aside class="cart-summary">
+            <p class="panel-caption">Resumo</p>
+            <h2 class="section-title">Seu pedido</h2>
+            <div class="summary-line">
+                <span>Itens</span>
+                <strong th:text="${carrinho.quantidadeTotal}">0</strong>
+            </div>
+            <div class="summary-line summary-total">
+                <span>Total</span>
+                <strong th:text="${#numbers.formatCurrency(carrinho.total)}">R$ 0,00</strong>
+            </div>
+            <form th:action="@{/loja/carrinho/finalizar}" method="post">
+                <button class="btn btn-primary btn-block" type="submit">Finalizar simulação</button>
+            </form>
+            <form th:action="@{/loja/carrinho/limpar}" method="post">
+                <button class="btn btn-secondary btn-block" type="submit">Limpar carrinho</button>
+            </form>
+            <p class="helper-text">Projeto fictício: nenhum pagamento ou pedido real será processado.</p>
+        </aside>
+    </section>
+
+    <section class="empty-state store-empty" th:if="${carrinho.vazio}">
+        <h2>Seu carrinho está vazio</h2>
+        <p>Adicione produtos do catálogo para continuar.</p>
+        <a class="btn btn-primary" th:href="@{/loja}">Ver produtos</a>
+    </section>
+</main>
+</body>
+</html>

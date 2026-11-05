@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja</title>
+    <link rel="stylesheet" th:href="@{/css/bat-theme.css}" href="/css/bat-theme.css">
+</head>
+<body>
+<main class="page-shell">
+    <nav class="store-nav" aria-label="Navegação da loja">
+        <a class="store-brand" th:href="@{/loja}">Fatec ADS Store</a>
+        <div class="store-nav-actions">
+            <a class="btn btn-secondary" th:href="@{/loja/carrinho}">
+                Carrinho <span class="cart-count" th:text="${quantidadeCarrinho}">0</span>
+            </a>
+            <form th:action="@{/logout}" method="post">
+                <button class="btn btn-secondary" type="submit">Sair</button>
+            </form>
+        </div>
+    </nav>
+
+    <section class="hero store-hero">
+        <span class="eyebrow">Área do usuário</span>
+        <h1>Produtos para você</h1>
+        <p>Escolha itens do catálogo e monte um carrinho de demonstração.</p>
+    </section>
+
+    <div class="feedback feedback-success" role="status" th:if="${mensagem}" th:text="${mensagem}"></div>
+    <div class="feedback feedback-error" role="alert" th:if="${erro}" th:text="${erro}"></div>
+
+    <section class="product-grid" aria-label="Catálogo de produtos" th:if="${!#lists.isEmpty(produtos)}">
+        <article class="product-card" th:each="produto : ${produtos}">
+            <div class="product-card-image">
+                <img th:if="${produto.imagemProduto != null and produto.imagemProduto.length > 0}"
+                     th:src="@{/produtos/imagem/{id}(id=${produto.idProduto})}"
+                     th:alt="${produto.descricaoProduto}">
+                <span th:unless="${produto.imagemProduto != null and produto.imagemProduto.length > 0}">Sem imagem</span>
+            </div>
+            <div class="product-card-body">
+                <span class="product-meta" th:text="${produto.marcaProduto + ' • ' + produto.unidadeProduto}">Marca • Unidade</span>
+                <h2 th:text="${produto.descricaoProduto}">Produto</h2>
+                <strong class="product-price" th:text="${#numbers.formatCurrency(produto.valorProduto)}">R$ 0,00</strong>
+                <form class="add-cart-form" th:action="@{/loja/carrinho/adicionar/{id}(id=${produto.idProduto})}" method="post">
+                    <label th:for="${'quantidade-' + produto.idProduto}">Quantidade</label>
+                    <input th:id="${'quantidade-' + produto.idProduto}" name="quantidade" type="number" min="1" value="1" required>
+                    <button class="btn btn-primary" type="submit">Adicionar</button>
+                </form>
+            </div>
+        </article>
+    </section>
+
+    <div class="empty-state store-empty" th:if="${#lists.isEmpty(produtos)}">
+        Nenhum produto disponível no momento.
+    </div>
+</main>
+</body>
+</html>

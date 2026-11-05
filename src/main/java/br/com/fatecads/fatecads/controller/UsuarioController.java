@@ -21,6 +21,9 @@ public class UsuarioController {
 
     @PostMapping("/salvar")
     public String salvar(@ModelAttribute Usuario usuario) {
+        if (!"ROLE_ADMIN".equals(usuario.getRole())) {
+            usuario.setRole("ROLE_USER");
+        }
         usuarioService.save(usuario);
         return "redirect:/usuarios/listar";
     }

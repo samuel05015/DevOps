@@ -67,8 +67,6 @@
                                 <option value="" disabled>Selecione uma role</option>
                                 <option value="ROLE_ADMIN">ROLE_ADMIN</option>
                                 <option value="ROLE_USER">ROLE_USER</option>
-                                <option value="ROLE_PROFESSOR">ROLE_PROFESSOR</option>
-                                <option value="ROLE_ALUNO">ROLE_ALUNO</option>
                             </select>
                         </div>
                     </div>
@@ -76,7 +74,7 @@
                     <div class="form-actions" style="margin-top: 24px;">
                         <input type="submit" th:value="${cadastroPublico ? 'Criar conta' : 'Salvar Usuario'}" value="Salvar Usuario">
                         <a class="btn btn-secondary"
-                           th:href="${cadastroPublico} ? @{/login} : @{/fatecads}"
+                           th:href="${cadastroPublico} ? @{/login} : @{/admin}"
                            th:text="${cadastroPublico ? 'Cancelar' : 'Tela Inicial'}">Tela Inicial</a>
                     </div>
                 </form>
